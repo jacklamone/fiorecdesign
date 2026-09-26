@@ -1,0 +1,9 @@
+PUBBLICARE SU GITHUB PAGES
+1. Crea un repository pubblico (es. studio-fiore).
+2. Carica TUTTI i file di questa cartella nella radice del repository (incluso .nojekyll).
+3. Settings > Pages > Source: Deploy from a branch > main / (root) > Save.
+4. Dopo 1-2 minuti il sito è su https://TUONOME.github.io/studio-fiore/
+5. Dominio personalizzato: Settings > Pages > Custom domain, poi spunta "Enforce HTTPS".
+
+ATTENZIONE: il form contatti è predisposto per Netlify e su GitHub Pages non invia messaggi.
+Serve collegarlo a un servizio come Web3Forms (gratuito).
