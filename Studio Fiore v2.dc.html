@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Studio Dott. Stefano Fiore · Finanza agevolata e microcredito · Sassari</title>
+  <link rel="icon" type="image/png" href="assets/logo-fiore-t.png">
+  <link rel="apple-touch-icon" href="assets/logo-fiore.png">
+  <template id="__bundler_thumbnail" data-bg-color="#14213d"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#14213d"></rect><polygon points="50,28 69,39 69,61 50,72 31,61 31,39" fill="none" stroke="#3fc1d9" stroke-width="5"></polygon></svg></template>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&amp;family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&amp;display=swap">
+  <script src="./image-slot.js"></script>
+  <style>
+    html { scroll-behavior: smooth; --fh: 'Hanken Grotesk', sans-serif; --fb: 'Hanken Grotesk', system-ui, sans-serif; --c-ink:#0e1f3a;--c-accd:#7d5f27;--c-acc:#a8823d;--c-accb:#d9b56a;--c-tint:#f1e6cf;--c-surf:#ece8df;--c-surfacc:#7a5c24;--c-spot:#8a6a2e;--c-deco1:#c9b891;--c-deco2:#2c4a7a;--c-ondark:#d8dde8;--c-ondarkm:#a3adc2;--c-text:#1a2233;--c-text2:#36405a;--c-mute:#56607a;--c-mute2:#5e677d;--c-bg:#f8f6f1; }
+    body { margin: 0; background: var(--c-bg); color: var(--c-text); font-family: var(--fb); -webkit-font-smoothing: antialiased; text-wrap: pretty; }
+    a { color: var(--c-accd); }
+    a:hover { color: var(--c-ink); }
+    :focus-visible { outline: 2px solid var(--c-acc); outline-offset: 3px; }
+    ::selection { background: var(--c-tint); }
+  </style>
+</helmet>
+
+<form name="contatti" data-netlify="true" netlify-honeypot="bot-field" hidden="true"><input name="nome"><input name="azienda"><input name="email"><input name="telefono"><input name="interesse"><textarea name="messaggio"></textarea><input name="bot-field"></form>
+
+<header style="position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--c-bg) 88%, transparent); backdrop-filter: saturate(1.4) blur(14px); -webkit-backdrop-filter: saturate(1.4) blur(14px); border-bottom: 1px solid color-mix(in srgb, var(--c-ink) 8%, transparent);">
+  <div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 64px); height: 76px; display: flex; align-items: center; gap: 24px;">
+    <a href="#/home" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--c-ink); margin-right: auto;">
+      <img src="assets/logo-fiore-t.png" alt="" style="width: 40px; height: 40px; display: block;">
+      <span style="display: flex; flex-direction: column; line-height: 1.1;">
+        <span style="font-family: var(--fh); font-weight: 700; font-size: 18px; letter-spacing: -0.01em;">Dott. Stefano Fiore</span>
+        <span style="font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-mute2);">Studio di Consulenza</span>
+      </span>
+    </a>
+    <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+      <nav style="display: flex; align-items: center; gap: 4px;">
+        <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="6">
+          <a href="{{ n.href }}" aria-current="{{ n.cur }}" style="position: relative; padding: 10px 12px; font-size: 15px; font-weight: 500; text-decoration: none; color: {{ n.color }}; border-radius: 8px;" style-hover="background: color-mix(in srgb, var(--c-ink) 6%, transparent); color: var(--c-ink);">{{ n.label }}<span style="position: absolute; left: 12px; right: 12px; bottom: 2px; height: 3px; border-radius: 3px; background: {{ n.bar }};"></span></a>
+        </sc-for>
+      </nav>
+      <a href="#/contatti" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 999px; background: var(--c-ink); color: #fff; font-size: 15px; font-weight: 600; text-decoration: none;" style-hover="background: var(--c-accd); color: #fff;">Contattaci <span aria-hidden="true">→</span></a>
+    </sc-if>
+    <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
+      <button type="button" onClick="{{ toggleMenu }}" aria-expanded="{{ menuAria }}" style="font: inherit; font-weight: 600; font-size: 15px; padding: 10px 18px; border-radius: 999px; border: 1.5px solid var(--c-ink); background: transparent; color: var(--c-ink); cursor: pointer;">{{ menuLabel }}</button>
+    </sc-if>
+  </div>
+  <div data-progress="" aria-hidden="true" style="position: absolute; left: 0; bottom: -1px; width: 100%; height: 2px; background: var(--c-accb); transform-origin: 0 50%; transform: scaleX(0);"></div>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <nav style="display: flex; flex-direction: column; padding: 8px clamp(20px, 5vw, 64px) 24px; background: var(--c-bg); border-top: 1px solid color-mix(in srgb, var(--c-ink) 8%, transparent);">
+      <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="6">
+        <a href="{{ n.href }}" style="padding: 14px 0; font-family: var(--fh); font-size: 26px; font-weight: 600; letter-spacing: -0.02em; text-decoration: none; color: {{ n.color }}; border-bottom: 1px solid color-mix(in srgb, var(--c-ink) 8%, transparent);">{{ n.label }}</a>
+      </sc-for>
+      <a href="#/contatti" style="margin-top: 20px; display: flex; justify-content: center; padding: 16px 20px; border-radius: 999px; background: var(--c-ink); color: #fff; font-size: 16px; font-weight: 600; text-decoration: none;">Contattaci →</a>
+    </nav>
+  </sc-if>
+</header>
+
+<main>
+
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+  <section data-screen-label="Home" style="position: relative; overflow: hidden; background-color: var(--c-ink); background-image: repeating-linear-gradient(30deg, color-mix(in srgb, var(--c-accb) 7%, transparent) 0 1px, transparent 1px 56px), repeating-linear-gradient(150deg, color-mix(in srgb, var(--c-accb) 7%, transparent) 0 1px, transparent 1px 56px), radial-gradient(70% 90% at 0% 50%, color-mix(in oklch, var(--c-ink), black 35%) 0%, transparent 70%), radial-gradient(120% 90% at 100% 0%, color-mix(in oklch, var(--c-acc) 16%, transparent) 0%, transparent 55%), linear-gradient(135deg, color-mix(in oklch, var(--c-ink), black 15%) 0%, color-mix(in oklch, var(--c-ink), white 8%) 100%); color: #fff;">
+    <div style="position: relative; max-width: 1280px; margin: 0 auto; padding: clamp(72px, 10vw, 130px) clamp(20px, 5vw, 64px) clamp(64px, 8vw, 110px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap: clamp(40px, 5vw, 72px); align-items: center;">
+      <div>
+      <p data-reveal="0" style="display: inline-flex; align-items: center; gap: 10px; margin: 0 0 32px; padding: 8px 14px; border-radius: 999px; background: color-mix(in srgb, var(--c-accb) 22%, transparent); color: #fff; font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;"><span style="width: 8px; height: 8px; border-radius: 50%; background: var(--c-accb);"></span>Sassari · Sardegna</p>
+      <h1 data-reveal="80" style="font-family: var(--fh); font-weight: 700; font-size: clamp(48px, 6.4vw, 100px); line-height: 0.95; letter-spacing: -0.04em; margin: 0; max-width: 11ch;">Finanza <span style="color: var(--c-accb);">agevolata</span> per imprese che crescono.</h1>
+      <p data-reveal="160" style="font-size: clamp(18px, 1.6vw, 21px); line-height: 1.55; max-width: 54ch; margin: 36px 0 0; color: rgba(255,255,255,0.92);">Contributi, agevolazioni e strumenti finanziari, anche a fondo perduto, di Regione, Stato e Unione Europea. Affianco PMI e aspiranti imprenditori dall’idea alla rendicontazione finale.</p>
+      <div data-reveal="240" style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 40px;">
+        <a href="#/contatti" style="display: inline-flex; align-items: center; gap: 10px; padding: 18px 28px; border-radius: 999px; background: var(--c-accb); color: var(--c-ink); font-size: 17px; font-weight: 600; text-decoration: none;" style-hover="background: var(--c-tint); color: var(--c-ink);">Parliamo del tuo progetto <span aria-hidden="true">→</span></a>
+        <a href="#/finanza-agevolata" style="display: inline-flex; align-items: center; padding: 18px 28px; border-radius: 999px; border: 1.5px solid rgba(255,255,255,0.7); color: #fff; font-size: 17px; font-weight: 600; text-decoration: none;" style-hover="border-color: #fff; color: #fff; background: rgba(255,255,255,0.06);">Cosa facciamo</a>
+      </div>
+      </div>
+      <figure style="margin: 0; justify-self: center; width: 100%; max-width: 540px; aspect-ratio: 1 / 1; border-radius: 28px; overflow: hidden; box-shadow: 0 40px 80px -30px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.08);"><img src="assets/hero-vetro.jpg" alt="Il simbolo dello Studio Fiore in vetro" style="display: block; width: 100%; height: 100%; object-fit: cover;"></figure>
+    </div>
+  </section>
+
+  <sc-if value="{{ showNumbers }}" hint-placeholder-val="{{ true }}">
+    <section aria-label="Lo Studio in numeri" style="position: relative; isolation: isolate; overflow: hidden; background: #fff;">
+      <img src="assets/logo-fiore.png" alt="" aria-hidden="true" style="position: absolute; right: -3%; top: 50%; transform: translateY(-50%) rotate(-8deg); width: clamp(240px, 30vw, 420px); height: auto; mix-blend-mode: multiply; opacity: 0.08; pointer-events: none; user-select: none; z-index: -1;">
+      <div style="max-width: 1280px; margin: 0 auto; padding: 56px clamp(20px, 5vw, 64px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 36px 48px;">
+        <div data-reveal="0" style="display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-family: var(--fh); font-weight: 800; font-size: clamp(56px, 6vw, 84px); line-height: 1; letter-spacing: -0.04em; color: var(--c-ink);">{{ n20 }}<span style="color: var(--c-acc);">+</span></span>
+          <span style="font-size: 16px; line-height: 1.45; color: var(--c-mute); max-width: 24ch;">anni come consulente per le PMI del territorio</span>
+        </div>
+        <div data-reveal="80" style="display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-family: var(--fh); font-weight: 800; font-size: clamp(56px, 6vw, 84px); line-height: 1; letter-spacing: -0.04em; color: var(--c-ink);">{{ n1 }}</span>
+          <span style="font-size: 16px; line-height: 1.45; color: var(--c-mute); max-width: 24ch;">solo referente, dall’idea ai controlli finali</span>
+        </div>
+        <div data-reveal="160" style="display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-family: var(--fh); font-weight: 800; font-size: clamp(56px, 6vw, 84px); line-height: 1; letter-spacing: -0.04em; color: var(--c-ink);">{{ n10 }}</span>
+          <span style="font-size: 16px; line-height: 1.45; color: var(--c-mute); max-width: 24ch;">livelli di enti finanziatori monitorati, dall’UE ai Comuni</span>
+        </div>
+        <div data-reveal="240" style="display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-family: var(--fh); font-weight: 800; font-size: clamp(56px, 6vw, 84px); line-height: 1; letter-spacing: -0.04em; color: var(--c-spot);">ENM</span>
+          <span style="font-size: 16px; line-height: 1.45; color: var(--c-mute); max-width: 24ch;">iscritto all’elenco nazionale dei Tutor Microcredito</span>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+
+
+  <section aria-label="Enti finanziatori" style="overflow: hidden; background: radial-gradient(120% 90% at 100% 0%, color-mix(in oklch, var(--c-acc) 26%, transparent) 0%, transparent 58%), radial-gradient(90% 80% at 0% 100%, color-mix(in oklch, var(--c-tint) 14%, transparent) 0%, transparent 62%), linear-gradient(135deg, var(--c-ink) 0%, color-mix(in oklch, var(--c-ink), white 18%) 100%); padding: 26px 0;">
+    <div data-marquee="" style="display: flex; width: max-content;">
+      <sc-for list="{{ entiLoop }}" as="e" hint-placeholder-count="10">
+        <span style="display: flex; align-items: center; gap: 32px; padding-right: 32px; font-family: var(--fh); font-weight: 600; font-size: clamp(22px, 2.4vw, 32px); letter-spacing: -0.02em; color: #fff; white-space: nowrap;">{{ e }}<span aria-hidden="true" style="width: 14px; height: 16px; clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); background: var(--c-accb);"></span></span>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="max-width: 1280px; margin: 0 auto; padding: clamp(80px, 10vw, 140px) clamp(20px, 5vw, 64px) 40px;">
+    <p data-reveal="0" style="margin: 0 0 16px; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-accd);">Cosa facciamo</p>
+    <h2 data-reveal="60" style="font-family: var(--fh); font-weight: 700; font-size: clamp(38px, 5.4vw, 76px); line-height: 1; letter-spacing: -0.035em; margin: 0; max-width: 15ch; color: var(--c-ink);">Quattro aree, un unico interlocutore.</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr)); gap: 16px; margin-top: 56px;">
+      <a href="#/finanza-agevolata" data-reveal="0" style="display: flex; flex-direction: column; gap: 14px; min-height: 300px; padding: 32px; border-radius: 20px; background: radial-gradient(120% 90% at 100% 0%, color-mix(in oklch, var(--c-acc) 26%, transparent) 0%, transparent 58%), radial-gradient(90% 80% at 0% 100%, color-mix(in oklch, var(--c-tint) 14%, transparent) 0%, transparent 62%), linear-gradient(135deg, var(--c-ink) 0%, color-mix(in oklch, var(--c-ink), white 18%) 100%); color: #fff; text-decoration: none; transition: transform .3s ease;" style-hover="transform: translateY(-6px); color: #fff;">
+        <span style="font-family: var(--fh); font-weight: 700; font-size: 18px; color: var(--c-accb);">01</span>
+        <span style="font-family: var(--fh); font-weight: 700; font-size: 30px; line-height: 1.05; letter-spacing: -0.02em;">Finanza agevolata</span>
+        <span style="font-size: 16px; line-height: 1.5; color: var(--c-ondark);">Bandi e contributi regionali, nazionali ed europei, seguiti dalla A alla Z.</span>
+        <span style="margin-top: auto; font-weight: 600; font-size: 15px;">Scopri →</span>
+      </a>
+      <a href="#/microcredito" data-reveal="80" style="display: flex; flex-direction: column; gap: 14px; min-height: 300px; padding: 32px; border-radius: 20px; background: radial-gradient(110% 90% at 100% 0%, color-mix(in oklch, white 30%, transparent) 0%, transparent 58%), linear-gradient(135deg, color-mix(in oklch, var(--c-accb), var(--c-ink) 9%) 0%, var(--c-accb) 45%, color-mix(in oklab, var(--c-accb), var(--c-tint) 55%) 100%); color: var(--c-ink); text-decoration: none; transition: transform .3s ease;" style-hover="transform: translateY(-6px); color: var(--c-ink);">
+        <span style="font-family: var(--fh); font-weight: 700; font-size: 18px;">02</span>
+        <span style="font-family: var(--fh); font-weight: 700; font-size: 30px; line-height: 1.05; letter-spacing: -0.02em;">Microcredito imprenditoriale</span>
+        <span style="font-size: 16px; line-height: 1.5; color: var(--c-text);">Da tutor ENM, un’alternativa concreta quando il bando non c’è.</span>
+        <span style="margin-top: auto; font-weight: 600; font-size: 15px;">Scopri →</span>
+      </a>
+      <a href="#/finanza-agevolata" data-reveal="160" style="display: flex; flex-direction: column; gap: 14px; min-height: 300px; padding: 32px; border-radius: 20px; background: radial-gradient(100% 90% at 100% 0%, color-mix(in oklch, var(--c-acc) 10%, transparent) 0%, transparent 58%), linear-gradient(160deg, var(--c-surf) 0%, color-mix(in oklab, var(--c-surf), var(--c-tint) 58%) 100%); color: var(--c-ink); text-decoration: none; transition: transform .3s ease;" style-hover="transform: translateY(-6px); color: var(--c-ink);">
+        <span style="font-family: var(--fh); font-weight: 700; font-size: 18px; color: var(--c-surfacc);">03</span>
+        <span style="font-family: var(--fh); font-weight: 700; font-size: 30px; line-height: 1.05; letter-spacing: -0.02em;">Certificazione aziendale</span>
+        <span style="font-size: 16px; line-height: 1.5; color: var(--c-text2);">ISO 9001, sistemi integrati, rintracciabilità di prodotto e di filiera.</span>
+        <span style="margin-top: auto; font-weight: 600; font-size: 15px;">Scopri →</span>
+      </a>
+      <a href="#/finanza-agevolata" data-reveal="240" style="display: flex; flex-direction: column; gap: 14px; min-height: 300px; padding: 32px; border-radius: 20px; background: #fff; color: var(--c-ink); text-decoration: none; box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--c-ink) 12%, transparent); transition: transform .3s ease;" style-hover="transform: translateY(-6px); color: var(--c-ink);">
+        <span style="font-family: var(--fh); font-weight: 700; font-size: 18px; color: var(--c-spot);">04</span>
+        <span style="font-family: var(--fh); font-weight: 700; font-size: 30px; line-height: 1.05; letter-spacing: -0.02em;">Formazione</span>
+        <span style="font-size: 16px; line-height: 1.5; color: var(--c-text2);">Docenza per imprenditori e aspiranti tali: strumenti da usare subito.</span>
+        <span style="margin-top: auto; font-weight: 600; font-size: 15px;">Scopri →</span>
+      </a>
+    </div>
+  </section>
+
+  <section style="max-width: 1280px; margin: 0 auto; padding: clamp(80px, 10vw, 140px) clamp(20px, 5vw, 64px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 64px clamp(40px, 7vw, 120px); align-items: start;">
+    <div>
+      <p data-reveal="0" style="margin: 0 0 16px; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-accd);">Cosa cambia, rispetto ad altri</p>
+      <h2 data-reveal="60" style="font-family: var(--fh); font-weight: 700; font-size: clamp(36px, 4.4vw, 60px); line-height: 1.02; letter-spacing: -0.035em; margin: 0; color: var(--c-ink); max-width: 14ch;">Cinque ragioni concrete.</h2>
+      <p data-reveal="90" style="margin: 24px 0 0; font-size: 19px; line-height: 1.6; color: var(--c-text2); max-width: 42ch;">Non ci limitiamo a ottenere l’agevolazione. Affianchiamo l’impresa in ogni fase del percorso, dalla candidatura fino alla chiusura, alla rendicontazione e alla verifica conclusiva del progetto.</p>
+      <figure data-reveal="120" style="margin: 48px 0 0; padding: 36px; border-radius: 20px; background: radial-gradient(120% 90% at 100% 0%, color-mix(in oklch, var(--c-acc) 26%, transparent) 0%, transparent 58%), radial-gradient(90% 80% at 0% 100%, color-mix(in oklch, var(--c-tint) 14%, transparent) 0%, transparent 62%), linear-gradient(135deg, var(--c-ink) 0%, color-mix(in oklch, var(--c-ink), white 18%) 100%); color: #fff;">
+        <span aria-hidden="true" style="display: block; font-family: var(--fh); font-weight: 800; font-size: 80px; line-height: 0.6; color: var(--c-accb); height: 36px;">“</span>
+        <blockquote style="margin: 0; font-family: var(--fh); font-weight: 500; font-size: clamp(22px, 2.2vw, 28px); line-height: 1.3; letter-spacing: -0.01em;">La stretta di mano, per me, conserva ancora un valore autentico: è il simbolo di un impegno reciproco, di una fiducia che si costruisce nel tempo.</blockquote>
+        <figcaption style="margin-top: 24px; font-size: 15px; color: var(--c-tint);">Dott. Stefano Fiore</figcaption>
+      </figure>
+    </div>
+    <ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column;">
+      <sc-for list="{{ diffs }}" as="d" hint-placeholder-count="5">
+        <li data-reveal="0" style="display: grid; grid-template-columns: 64px 1fr; gap: 6px 16px; padding: 28px 0; border-top: 1.5px solid color-mix(in srgb, var(--c-ink) 12%, transparent);">
+          <span style="grid-row: span 2; font-family: var(--fh); font-weight: 800; font-size: 34px; line-height: 1; letter-spacing: -0.03em; color: var(--c-acc);">{{ d.n }}</span>
+          <h3 style="margin: 0; font-family: var(--fh); font-weight: 700; font-size: 22px; line-height: 1.2; letter-spacing: -0.01em; color: var(--c-ink);">{{ d.t }}</h3>
+          <p style="margin: 0; font-size: 16px; line-height: 1.55; color: var(--c-mute); max-width: 50ch;">{{ d.d }}</p>
+        </li>
+      </sc-for>
+    </ol>
+  </section>
+</sc-if>
+
+<sc-if value="{{ isChi }}" hint-placeholder-val="{{ false }}">
+  <section data-screen-label="Chi siamo" style="position: relative; isolation: isolate; overflow: hidden; background-color: var(--c-ink); background-image: repeating-linear-gradient(30deg, color-mix(in srgb, var(--c-accb) 7%, transparent) 0 1px, transparent 1px 56px), repeating-linear-gradient(150deg, color-mix(in srgb, var(--c-accb) 7%, transparent) 0 1px, transparent 1px 56px), radial-gradient(120% 90% at 100% 0%, color-mix(in oklch, var(--c-acc) 26%, transparent) 0%, transparent 58%), radial-gradient(90% 80% at 0% 100%, color-mix(in oklch, var(--c-tint) 14%, transparent) 0%, transparent 62%), linear-gradient(135deg, var(--c-ink) 0%, color-mix(in oklch, var(--c-ink), white 18%) 100%); color: #fff;">
+    <img src="assets/logo-fiore.png" alt="" aria-hidden="true" style="position: absolute; right: -4%; top: 50%; transform: translateY(-50%) rotate(-8deg); width: clamp(240px, 32vw, 480px); height: auto; mix-blend-mode: screen; filter: grayscale(1) invert(1); opacity: 0.12; pointer-events: none; user-select: none; z-index: -1;">
+    <div style="max-width: 1280px; margin: 0 auto; padding: clamp(72px, 10vw, 130px) clamp(20px, 5vw, 64px) clamp(56px, 7vw, 96px);">
+      <p data-reveal="0" style="margin: 0 0 20px; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-accb);">Chi siamo</p>
+      <h1 data-reveal="60" style="font-family: var(--fh); font-weight: 700; font-size: clamp(46px, 7.4vw, 112px); line-height: 0.95; letter-spacing: -0.04em; margin: 0; max-width: 14ch;">Un partner tecnico, non un intermediario.</h1>
+    </div>
+  </section>
+  <section style="max-width: 1280px; margin: 0 auto; padding: clamp(72px, 9vw, 120px) clamp(20px, 5vw, 64px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 56px clamp(40px, 7vw, 110px); align-items: start;">
+    <div data-reveal="0" style="position: relative;">
+      <div aria-hidden="true" style="position: absolute; left: -18px; top: -18px; right: 18px; bottom: 18px; border-radius: 24px; background: radial-gradient(110% 90% at 100% 0%, color-mix(in oklch, white 30%, transparent) 0%, transparent 58%), linear-gradient(135deg, color-mix(in oklch, var(--c-accb), var(--c-ink) 9%) 0%, var(--c-accb) 45%, color-mix(in oklab, var(--c-accb), var(--c-tint) 55%) 100%);"></div>
+      <div style="position: relative; aspect-ratio: 4 / 5; border-radius: 24px; overflow: hidden; background: var(--c-surf);">
+        <image-slot id="foto-stefano" shape="rect" placeholder="Foto del Dott. Stefano Fiore"></image-slot>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 22px;">
+      <h2 data-reveal="0" style="font-family: var(--fh); font-weight: 700; font-size: clamp(30px, 3.2vw, 44px); line-height: 1.08; letter-spacing: -0.03em; margin: 0 0 8px; color: var(--c-ink);">Dott. Stefano Fiore</h2>
+      <p data-reveal="40" style="margin: 0; font-size: 14px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--c-accd);">Economia · Tutor Microcredito · Sassari</p>
+      <p data-reveal="80" style="margin: 0; font-size: 18px; line-height: 1.65; color: var(--c-text2);">Lo Studio è una struttura professionale dedicata alla finanza agevolata e alla progettazione di interventi finanziabili per le piccole e medie imprese: individuazione, analisi e accesso a contributi, agevolazioni e strumenti finanziari, per costruire investimenti sostenibili.</p>
+      <p data-reveal="120" style="margin: 0; font-size: 18px; line-height: 1.65; color: var(--c-text2);">L’imprenditore è affiancato in ogni fase: dall’idea progettuale alla documentazione, dalla domanda alla rendicontazione. Ogni progetto è analizzato con rigore, per massimizzare le possibilità di accesso ai fondi.</p>
+      <p data-reveal="160" style="margin: 0; font-size: 18px; line-height: 1.65; color: var(--c-text2);">Una rete di professionisti con competenze complementari garantisce risposte anche alle richieste più articolate. Accanto alla consulenza, la formazione: diffondere cultura finanziaria è parte del lavoro.</p>
+      <div data-reveal="200" style="display: flex; flex-direction: column; gap: 12px; margin-top: 12px;">
+        <p style="margin: 0; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-accd);">Percorso</p>
+        <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; font-size: 17px; line-height: 1.5; color: var(--c-ink);">
+          <li style="display: flex; gap: 12px;"><span style="color: var(--c-acc);">→</span>Diploma di ragioniere e perito commerciale, laurea in Economia</li>
+          <li style="display: flex; gap: 12px;"><span style="color: var(--c-acc);">→</span>Responsabile Qualità per commesse Sogei, INAIL e INPS</li>
+          <li style="display: flex; gap: 12px;"><span style="color: var(--c-acc);">→</span>Tirocinio da commercialista e revisore contabile a Sassari</li>
+          <li style="display: flex; gap: 12px;"><span style="color: var(--c-acc);">→</span>Oltre vent’anni come consulente per le PMI</li>
+          <li style="display: flex; gap: 12px;"><span style="color: var(--c-acc);">→</span>Iscritto all’elenco nazionale dei “Tutor Microcredito” presso l’Ente Nazionale per il Microcredito</li>
+          <li style="display: flex; gap: 12px;"><span style="color: var(--c-acc);">→</span>Docente in percorsi formativi per imprenditori e aspiranti imprenditori</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <section style="position: relative; isolation: isolate; overflow: hidden; background: radial-gradient(100% 90% at 100% 0%, color-mix(in oklch, var(--c-acc) 10%, transparent) 0%, transparent 58%), linear-gradient(160deg, var(--c-surf) 0%, color-mix(in oklab, var(--c-surf), var(--c-tint) 58%) 100%);">
+    <img src="assets/logo-fiore.png" alt="" aria-hidden="true" style="position: absolute; right: -6%; top: 50%; transform: translateY(-50%) rotate(8deg); width: clamp(220px, 30vw, 440px); height: auto; mix-blend-mode: multiply; opacity: 0.08; pointer-events: none; user-select: none; z-index: -1;">
+    <div style="max-width: 1280px; margin: 0 auto; padding: clamp(72px, 9vw, 120px) clamp(20px, 5vw, 64px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 48px clamp(40px, 7vw, 110px); align-items: end;">
+      <div>
+        <p data-reveal="0" style="margin: 0 0 20px; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-surfacc);">In cosa credo</p>
+        <blockquote data-reveal="60" style="margin: 0; font-family: var(--fh); font-weight: 600; font-size: clamp(30px, 3.8vw, 52px); line-height: 1.08; letter-spacing: -0.03em; color: var(--c-ink);">“Essere reali, chiari e trasparenti è più importante che essere perfetti.”</blockquote>
+      </div>
+      <p data-reveal="120" style="margin: 0; font-size: 18px; line-height: 1.65; color: var(--c-text2); max-width: 50ch;">Credo nella rete tra imprese e nella capacità del territorio di fare sistema: ogni impresa è una risorsa, portatrice di esperienze e competenze da valorizzare. E la stretta di mano conserva ancora un valore autentico.</p>
+    </div>
+  </section>
+</sc-if>
+
+<sc-if value="{{ isFin }}" hint-placeholder-val="{{ false }}">
+  <section data-screen-label="Finanza agevolata" style="background-color: var(--c-ink); background-image: repeating-linear-gradient(30deg, color-mix(in srgb, var(--c-accb) 7%, transparent) 0 1px, transparent 1px 56px), repeating-linear-gradient(150deg, color-mix(in srgb, var(--c-accb) 7%, transparent) 0 1px, transparent 1px 56px), radial-gradient(120% 90% at 100% 0%, color-mix(in oklch, var(--c-acc) 26%, transparent) 0%, transparent 58%), radial-gradient(90% 80% at 0% 100%, color-mix(in oklch, var(--c-tint) 14%, transparent) 0%, transparent 62%), linear-gradient(135deg, var(--c-ink) 0%, color-mix(in oklch, var(--c-ink), white 18%) 100%); color: #fff;">
+    <div style="max-width: 1280px; margin: 0 auto; padding: clamp(72px, 10vw, 130px) clamp(20px, 5vw, 64px) clamp(56px, 7vw, 96px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 40px clamp(40px, 6vw, 96px); align-items: end;">
+      <div>
+        <p data-reveal="0" style="margin: 0 0 20px; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-accb);">Finanza agevolata</p>
+        <h1 data-reveal="60" style="font-family: var(--fh); font-weight: 700; font-size: clamp(46px, 7.4vw, 112px); line-height: 0.95; letter-spacing: -0.04em; margin: 0;">Dalla A <span style="color: var(--c-accb);">alla Z.</span></h1>
+      </div>
+      <p data-reveal="120" style="margin: 0; font-size: 19px; line-height: 1.6; color: var(--c-ondark); max-width: 50ch;">Interpreto gli strumenti di sostegno pubblici e privati e li uso in modo strategico. Gestisco i rapporti con gli Enti, monitoro il progetto e curo la rendicontazione: l’impresa si concentra sulla produzione.</p>
+    </div>
+  </section>
+  <section style="max-width: 1280px; margin: 0 auto; padding: clamp(72px, 9vw, 120px) clamp(20px, 5vw, 64px) 40px;">
+    <h2 data-reveal="0" style="font-family: var(--fh); font-weight: 700; font-size: clamp(34px, 4.2vw, 56px); line-height: 1.02; letter-spacing: -0.035em; margin: 0; color: var(--c-ink); max-width: 18ch;">Nove attività, un solo referente.</h2>
+    <ol style="list-style: none; margin: 48px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 16px;">
+      <sc-for list="{{ services }}" as="s" hint-placeholder-count="9">
+        <li data-reveal="0" style="display: flex; flex-direction: column; gap: 18px; padding: 28px; border-radius: 18px; background: #fff; box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--c-ink) 8%, transparent); transition: background .25s ease, transform .25s ease;" style-hover="background: var(--c-tint); transform: translateY(-4px);">
+          <span style="font-family: var(--fh); font-weight: 800; font-size: 36px; line-height: 1; letter-spacing: -0.03em; color: var(--c-acc);">{{ s.n }}</span>
+          <span style="font-size: 17px; line-height: 1.5; color: var(--c-text);">{{ s.t }}</span>
+        </li>
+      </sc-for>
+    </ol>
+  </section>
+  <section style="max-width: 1280px; margin: 0 auto; padding: 56px clamp(20px, 5vw, 64px);">
+    <p data-reveal="0" style="margin: 0 0 20px; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-accd);">Gli enti che erogano</p>
+    <div data-reveal="60" style="display: flex; flex-wrap: wrap; gap: 10px;">
+      <sc-for list="{{ enti }}" as="e" hint-placeholder-count="10">
+        <span style="padding: 10px 18px; border-radius: 999px; background: var(--c-surf); color: var(--c-ink); font-size: 15px; font-weight: 500;">{{ e }}</span>
+      </sc-for>
+    </div>
+  </section>
+  <section style="max-width: 1280px; margin: 0 auto; padding: 56px clamp(20px, 5vw, 64px) clamp(80px, 10vw, 130px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 16px;">
+    <div data-reveal="0" style="padding: clamp(32px, 4vw, 48px); border-radius: 24px; background: radial-gradient(100% 90% at 100% 0%, color-mix(in oklch, var(--c-acc) 10%, transparent) 0%, transparent 58%), linear-gradient(160deg, var(--c-surf) 0%, color-mix(in oklab, var(--c-surf), var(--c-tint) 58%) 100%);">
+      <p style="margin: 0 0 16px; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-surfacc);">Qualità · Ambiente · Sicurezza</p>
+      <h3 style="margin: 0; font-family: var(--fh); font-weight: 700; font-size: clamp(28px, 3vw, 40px); line-height: 1.05; letter-spacing: -0.03em; color: var(--c-ink);">Certificazione aziendale</h3>
+      <p style="margin: 18px 0 0; font-size: 17px; line-height: 1.6; color: var(--c-text2);">Dalle cooperative sociali di tutta la Sardegna all’agroalimentare: sistemi di qualità, certificazione di prodotto, rintracciabilità aziendale e di filiera. Supportiamo le imprese nell’implementazione e nella certificazione del Sistema di Gestione per la Qualità.</p>
+      <ul style="list-style: none; margin: 24px 0 0; padding: 0; display: flex; flex-direction: column; gap: 10px; font-size: 17px; color: var(--c-ink); font-weight: 500;">
+        <li style="display: flex; gap: 12px;"><span style="color: var(--c-surfacc);">→</span>Certificazioni di qualità ISO 9001</li>
+        <li style="display: flex; gap: 12px;"><span style="color: var(--c-surfacc);">→</span>Certificazioni dei Sistemi Integrati</li>
+        <li style="display: flex; gap: 12px;"><span style="color: var(--c-surfacc);">→</span>Mantenimento dei sistemi già certificati</li>
+      </ul>
+    </div>
+    <div data-reveal="80" style="padding: clamp(32px, 4vw, 48px); border-radius: 24px; background: #fff; box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--c-ink) 10%, transparent);">
+      <p style="margin: 0 0 16px; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-spot);">Docenza e corsi</p>
+      <h3 style="margin: 0; font-family: var(--fh); font-weight: 700; font-size: clamp(28px, 3vw, 40px); line-height: 1.05; letter-spacing: -0.03em; color: var(--c-ink);">Formazione</h3>
+      <p style="margin: 18px 0 0; font-size: 17px; line-height: 1.6; color: var(--c-text2);">Docenza nei percorsi di formazione imprenditoriale e di creazione d’impresa. Corsi di accompagnamento alle certificazioni dei Sistemi di Gestione e ai disciplinari di prodotto. Un approccio pratico: competenze da applicare subito in azienda.</p>
+    </div>
+  </section>
+</sc-if>
+
+<sc-if value="{{ isMicro }}" hint-placeholder-val="{{ false }}">
+  <section data-screen-label="Microcredito" style="background-color: var(--c-accb); background-image: repeating-linear-gradient(30deg, color-mix(in srgb, var(--c-ink) 7%, transparent) 0 1px, transparent 1px 56px), repeating-linear-gradient(150deg, color-mix(in srgb, var(--c-ink) 7%, transparent) 0 1px, transparent 1px 56px), radial-gradient(110% 90% at 100% 0%, color-mix(in oklch, white 30%, transparent) 0%, transparent 58%), linear-gradient(135deg, color-mix(in oklch, var(--c-accb), var(--c-ink) 9%) 0%, var(--c-accb) 45%, color-mix(in oklab, var(--c-accb), var(--c-tint) 55%) 100%); color: var(--c-ink);">
+    <div style="max-width: 1280px; margin: 0 auto; padding: clamp(72px, 10vw, 130px) clamp(20px, 5vw, 64px) clamp(56px, 7vw, 96px);">
+      <p data-reveal="0" style="margin: 0 0 20px; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-ink);">Tutor dell’Ente Nazionale per il Microcredito</p>
+      <h1 data-reveal="60" style="font-family: var(--fh); font-weight: 700; font-size: clamp(46px, 7.4vw, 112px); line-height: 0.95; letter-spacing: -0.04em; margin: 0; max-width: 13ch;">Quando il bando non c’è, c’è il microcredito.</h1>
+    </div>
+  </section>
+  <section style="max-width: 1280px; margin: 0 auto; padding: clamp(72px, 9vw, 120px) clamp(20px, 5vw, 64px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 56px clamp(40px, 6vw, 96px); align-items: start;">
+    <div style="display: flex; flex-direction: column; gap: 22px;">
+      <p data-reveal="0" style="margin: 0; font-size: 19px; line-height: 1.6; color: var(--c-text2);">Iscritto all’elenco nazionale dei “Tutor Microcredito” presso l’Ente Nazionale per il Microcredito, accompagno l’imprenditore all’ottenimento del finanziamento e continuo a seguirlo nei primi anni di attività, quando l’impresa muove i primi passi con flussi finanziari nuovi.</p>
+      <figure data-reveal="60" style="margin: 12px 0 0; padding-left: 24px; border-left: 4px solid var(--c-accb);">
+        <blockquote style="margin: 0; font-family: var(--fh); font-weight: 600; font-size: clamp(22px, 2.2vw, 28px); line-height: 1.3; letter-spacing: -0.015em; color: var(--c-ink);">“Spiego dalla A alla Z tutto il percorso: l’imprenditore fa scelte anche di vita per la propria azienda, quindi non si può tralasciare nulla.”</blockquote>
+        <figcaption style="margin-top: 14px; font-size: 15px; color: var(--c-mute2);">Intervista su <em>Microfinanza</em>, n. 49 speciale Tutor, 2024</figcaption>
+      </figure>
+      <div data-reveal="120" style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px;">
+        <a href="https://www.microcredito.gov.it/finanziamenti/117-comunicazione/1590-microcredito-imprenditoriale.html" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; padding: 14px 22px; border-radius: 999px; background: var(--c-ink); color: #fff; font-size: 15px; font-weight: 600; text-decoration: none;" style-hover="background: var(--c-accd); color: #fff;">Cos’è il microcredito ↗</a>
+        <a href="https://tutor.microcredito.gov.it/elenco-nazionale-obbligatorio/tutor-elenco-nazionale-obbligatorio-persone-fisiche/" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; padding: 14px 22px; border-radius: 999px; border: 1.5px solid var(--c-ink); color: var(--c-ink); font-size: 15px; font-weight: 600; text-decoration: none;" style-hover="background: color-mix(in srgb, var(--c-ink) 6%, transparent); color: var(--c-ink);">Elenco nazionale tutor ↗</a>
+      </div>
+    </div>
+    <figure data-reveal="80" style="margin: 0;">
+      <div style="position: relative; aspect-ratio: 16 / 9; border-radius: 20px; overflow: hidden; background: var(--c-ink);">
+        <iframe src="https://www.youtube-nocookie.com/embed/oFjdlyHHA90?start=47&amp;rel=0" title="Intervista al Dott. Stefano Fiore" style="position: absolute; inset: 0; width: 100%; height: 100%; border: 0;" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="true" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      </div>
+      <figcaption style="margin-top: 14px; font-size: 15px; color: var(--c-mute2);">L’intervista: il percorso professionale e il ruolo del tutor.</figcaption>
+    </figure>
+  </section>
+</sc-if>
+
+<sc-if value="{{ isMetodo }}" hint-placeholder-val="{{ false }}">
+  <section data-screen-label="Come lavoriamo" style="position: relative; isolation: isolate; overflow: hidden; background-color: var(--c-ink); background-image: repeating-linear-gradient(30deg, color-mix(in srgb, var(--c-accb) 7%, transparent) 0 1px, transparent 1px 56px), repeating-linear-gradient(150deg, color-mix(in srgb, var(--c-accb) 7%, transparent) 0 1px, transparent 1px 56px), radial-gradient(120% 90% at 100% 0%, color-mix(in oklch, var(--c-acc) 26%, transparent) 0%, transparent 58%), radial-gradient(90% 80% at 0% 100%, color-mix(in oklch, var(--c-tint) 14%, transparent) 0%, transparent 62%), linear-gradient(135deg, var(--c-ink) 0%, color-mix(in oklch, var(--c-ink), white 18%) 100%); color: #fff;">
+    <img src="assets/logo-fiore.png" alt="" aria-hidden="true" style="position: absolute; right: -4%; top: 50%; transform: translateY(-50%) rotate(8deg); width: clamp(240px, 32vw, 480px); height: auto; mix-blend-mode: screen; filter: grayscale(1) invert(1); opacity: 0.12; pointer-events: none; user-select: none; z-index: -1;">
+    <div style="max-width: 1280px; margin: 0 auto; padding: clamp(72px, 10vw, 130px) clamp(20px, 5vw, 64px) clamp(56px, 7vw, 96px);">
+      <p data-reveal="0" style="margin: 0 0 20px; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-accb);">Come lavoriamo</p>
+      <h1 data-reveal="60" style="font-family: var(--fh); font-weight: 700; font-size: clamp(46px, 7.4vw, 112px); line-height: 0.95; letter-spacing: -0.04em; margin: 0; max-width: 13ch;">Su misura, <span style="color: var(--c-accb);">passo dopo passo.</span></h1>
+    </div>
+  </section>
+  <section style="max-width: 1280px; margin: 0 auto; padding: clamp(72px, 9vw, 120px) clamp(20px, 5vw, 64px) clamp(80px, 10vw, 130px);">
+    <ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column;">
+      <sc-for list="{{ steps }}" as="st" hint-placeholder-count="5">
+        <li data-reveal="0" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 12px clamp(32px, 6vw, 96px); padding: clamp(32px, 4vw, 48px) 0; border-top: 1.5px solid color-mix(in srgb, var(--c-ink) 12%, transparent); align-items: baseline;">
+          <div style="display: flex; align-items: baseline; gap: 20px;">
+            <span style="font-family: var(--fh); font-weight: 800; font-size: clamp(64px, 7vw, 104px); line-height: 0.85; letter-spacing: -0.05em; color: var(--c-accb);">{{ st.n }}</span>
+            <h2 style="margin: 0; font-family: var(--fh); font-weight: 700; font-size: clamp(26px, 2.8vw, 38px); line-height: 1.05; letter-spacing: -0.025em; color: var(--c-ink);">{{ st.t }}</h2>
+          </div>
+          <p style="margin: 0; font-size: 18px; line-height: 1.6; color: var(--c-text2); max-width: 52ch;">{{ st.d }}</p>
+        </li>
+      </sc-for>
+    </ol>
+  </section>
+</sc-if>
+
+<sc-if value="{{ isStorie }}" hint-placeholder-val="{{ false }}">
+  <section data-screen-label="Storie di successo" style="position: relative; isolation: isolate; overflow: hidden; background-color: var(--c-ink); background-image: repeating-linear-gradient(30deg, color-mix(in srgb, var(--c-accb) 7%, transparent) 0 1px, transparent 1px 56px), repeating-linear-gradient(150deg, color-mix(in srgb, var(--c-accb) 7%, transparent) 0 1px, transparent 1px 56px), radial-gradient(120% 90% at 100% 0%, color-mix(in oklch, var(--c-acc) 26%, transparent) 0%, transparent 58%), radial-gradient(90% 80% at 0% 100%, color-mix(in oklch, var(--c-tint) 14%, transparent) 0%, transparent 62%), linear-gradient(135deg, var(--c-ink) 0%, color-mix(in oklch, var(--c-ink), white 18%) 100%); color: #fff;">
+    <img src="assets/logo-fiore.png" alt="" aria-hidden="true" style="position: absolute; right: -4%; top: 50%; transform: translateY(-50%) rotate(-8deg); width: clamp(240px, 32vw, 480px); height: auto; mix-blend-mode: screen; filter: grayscale(1) invert(1); opacity: 0.12; pointer-events: none; user-select: none; z-index: -1;">
+    <div style="max-width: 1280px; margin: 0 auto; padding: clamp(72px, 10vw, 130px) clamp(20px, 5vw, 64px) clamp(56px, 7vw, 96px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 40px clamp(40px, 6vw, 96px); align-items: end;">
+      <div>
+        <p data-reveal="0" style="margin: 0 0 20px; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-accb);">Storie di successo</p>
+        <h1 data-reveal="60" style="font-family: var(--fh); font-weight: 700; font-size: clamp(46px, 7.4vw, 112px); line-height: 0.95; letter-spacing: -0.04em; margin: 0; max-width: 11ch;">Progetti diventati imprese.</h1>
+      </div>
+      <p data-reveal="120" style="margin: 0; font-size: 19px; line-height: 1.6; color: var(--c-ondark); max-width: 46ch;">Negli anni abbiamo accompagnato molti clienti a realizzare i loro investimenti. Eccone alcuni.</p>
+    </div>
+  </section>
+  <section style="max-width: 1280px; margin: 0 auto; padding: clamp(72px, 9vw, 120px) clamp(20px, 5vw, 64px) clamp(80px, 10vw, 130px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 480px), 1fr)); gap: 20px;">
+    <sc-for list="{{ stories }}" as="c" hint-placeholder-count="4">
+      <article data-reveal="0" style="border-radius: 22px; overflow: hidden; background: #fff; box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--c-ink) 8%, transparent);">
+        <div style="padding: clamp(28px, 3vw, 40px); display: flex; flex-direction: column; gap: 14px;">
+          <span style="align-self: flex-start; padding: 6px 12px; border-radius: 999px; background: var(--c-tint); color: var(--c-ink); font-size: 13px; font-weight: 600;">{{ c.tipo }}</span>
+          <h2 style="margin: 0; font-family: var(--fh); font-weight: 700; font-size: 26px; line-height: 1.1; letter-spacing: -0.02em; color: var(--c-ink);">{{ c.nome }}</h2>
+          <p style="margin: 0; font-size: 16px; line-height: 1.55; color: var(--c-mute);">{{ c.desc }}</p>
+        </div>
+      </article>
+    </sc-for>
+  </section>
+</sc-if>
+
+<sc-if value="{{ isContatti }}" hint-placeholder-val="{{ false }}">
+  <section data-screen-label="Contatti" style="background-color: var(--c-ink); background-image: repeating-linear-gradient(30deg, color-mix(in srgb, var(--c-accb) 7%, transparent) 0 1px, transparent 1px 56px), repeating-linear-gradient(150deg, color-mix(in srgb, var(--c-accb) 7%, transparent) 0 1px, transparent 1px 56px), radial-gradient(120% 90% at 100% 0%, color-mix(in oklch, var(--c-acc) 26%, transparent) 0%, transparent 58%), radial-gradient(90% 80% at 0% 100%, color-mix(in oklch, var(--c-tint) 14%, transparent) 0%, transparent 62%), linear-gradient(135deg, var(--c-ink) 0%, color-mix(in oklch, var(--c-ink), white 18%) 100%); color: #fff; position: relative; overflow: hidden;">
+    <div style="position: relative; max-width: 1280px; margin: 0 auto; padding: clamp(72px, 10vw, 130px) clamp(20px, 5vw, 64px) clamp(56px, 7vw, 96px);">
+      <p data-reveal="0" style="margin: 0 0 20px; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-accb);">Contatti</p>
+      <h1 data-reveal="60" style="font-family: var(--fh); font-weight: 700; font-size: clamp(46px, 7.4vw, 112px); line-height: 0.95; letter-spacing: -0.04em; margin: 0; max-width: 12ch;">Raccontami il tuo <span style="color: var(--c-accb);">progetto.</span></h1>
+    </div>
+  </section>
+  <section style="position: relative; isolation: isolate; overflow: hidden; max-width: 1280px; margin: 0 auto; padding: clamp(64px, 8vw, 110px) clamp(20px, 5vw, 64px) clamp(80px, 10vw, 130px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 48px clamp(40px, 6vw, 96px); align-items: start;">
+    <img src="assets/logo-fiore.png" alt="" aria-hidden="true" style="position: absolute; left: -4%; bottom: -8%; width: clamp(320px, 46vw, 640px); height: auto; mix-blend-mode: multiply; filter: grayscale(0.2); opacity: 0.1; pointer-events: none; user-select: none; z-index: -1;">
+    <div style="display: flex; flex-direction: column; gap: 28px;">
+      <p data-reveal="0" style="margin: 0; font-size: 19px; line-height: 1.6; color: var(--c-text2); max-width: 42ch;">Analizziamo insieme la fattibilità dell’idea e le misure più adatte. Il primo contatto è telefonico o per email; poi ci si incontra di persona.</p>
+      <div data-reveal="60" style="display: flex; flex-direction: column; gap: 4px; padding: 28px; border-radius: 20px; background: radial-gradient(100% 90% at 100% 0%, color-mix(in oklch, var(--c-acc) 10%, transparent) 0%, transparent 58%), linear-gradient(160deg, var(--c-surf) 0%, color-mix(in oklab, var(--c-surf), var(--c-tint) 58%) 100%);">
+        <span style="font-family: var(--fh); font-weight: 700; font-size: 20px; color: var(--c-ink);">Studio di Consulenza Dott. Stefano Fiore</span>
+        <span style="font-size: 16px; line-height: 1.6; color: var(--c-text2);">Via Pietro Mastino 1, 07100 Sassari</span><span style="margin-top: 8px; display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-mute2);">Orari</span><span style="font-size: 16px; line-height: 1.6; color: var(--c-text2);">Lunedì–venerdì · 9:30–13:00 e 15:30–18:30</span></span>
+        <a href="mailto:fiorestefano@hotmail.com" style="margin-top: 12px; font-size: 18px; font-weight: 600;">fiorestefano@hotmail.com</a>
+        <span style="margin-top: 8px; display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-mute2);">Telefono</span><a href="tel:+393469546917" style="font-size: 18px; font-weight: 600;">+39 346 954 6917</a></span>
+        <span style="margin-top: 8px; display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-mute2);">WhatsApp</span><a href="https://wa.me/393469546917" target="_blank" rel="noopener" style="font-size: 18px; font-weight: 600;">+39 346 954 6917</a></span>
+        <a href="https://wa.me/393469546917?text=Buongiorno%20Dott.%20Fiore%2C%20vorrei%20un%20primo%20colloquio." target="_blank" rel="noopener" style="margin-top: 16px; align-self: flex-start; display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 999px; background: #1f8f4e; color: #fff; font-size: 16px; font-weight: 600; text-decoration: none;" style-hover="background: #17733e; color: #fff;"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"></path></svg>Scrivimi su WhatsApp</a>
+        <span style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px;"><a href="https://wa.me/393469546917" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp" style="width: 44px; height: 44px; border-radius: 999px; display: flex; align-items: center; justify-content: center; text-decoration: none; background: var(--c-surf); color: var(--c-ink);" style-hover="background: var(--c-ink); color: #fff;"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"></path></svg></a><a href="https://www.linkedin.com/in/stefano-fiore-a02bb4a3/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn" style="width: 44px; height: 44px; border-radius: 999px; display: flex; align-items: center; justify-content: center; text-decoration: none; background: var(--c-surf); color: var(--c-ink);" style-hover="background: var(--c-ink); color: #fff;"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.5h4V21H3V9.5Zm6.5 0h3.8v1.6h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.2c0-1.2 0-2.9-1.8-2.9s-2 1.4-2 2.8V21h-4V9.5Z"></path></svg></a><a href="https://www.facebook.com/stefano.fiore.735" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook" style="width: 44px; height: 44px; border-radius: 999px; display: flex; align-items: center; justify-content: center; text-decoration: none; background: var(--c-surf); color: var(--c-ink);" style-hover="background: var(--c-ink); color: #fff;"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.6c0-.9.3-1.5 1.5-1.5h1.5V4.4c-.3 0-1.2-.1-2.2-.1-2.2 0-3.8 1.4-3.8 3.9v2.3H8v3h2.5V21h3Z"></path></svg></a></span>
+      </div>
+    </div>
+    <div data-reveal="80" style="padding: clamp(28px, 4vw, 44px); border-radius: 24px; background: #fff; box-shadow: 0 1px 0 color-mix(in srgb, var(--c-ink) 4%, transparent), 0 24px 60px -30px color-mix(in srgb, var(--c-ink) 35%, transparent);">
+      <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+        <div style="padding: 24px 0; display: flex; flex-direction: column; gap: 14px; align-items: flex-start;">
+          <span style="width: 56px; height: 56px; border-radius: 50%; background: var(--c-accb); color: var(--c-ink); display: grid; place-items: center; font-size: 26px; font-weight: 700;">✓</span>
+          <h2 style="margin: 0; font-family: var(--fh); font-weight: 700; font-size: 32px; letter-spacing: -0.02em; color: var(--c-ink);">Grazie, richiesta ricevuta.</h2>
+          <p style="margin: 0; font-size: 17px; line-height: 1.6; color: var(--c-mute);">Ti ricontatterò al più presto per fissare un primo colloquio.</p>
+          <button type="button" onClick="{{ reset }}" style="font: inherit; font-weight: 600; margin-top: 8px; padding: 12px 20px; border-radius: 999px; border: 1.5px solid var(--c-ink); background: transparent; color: var(--c-ink); cursor: pointer;">Invia un’altra richiesta</button>
+        </div>
+      </sc-if>
+      <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+        <form name="contatti" onSubmit="{{ submit }}" style="display: flex; flex-direction: column; gap: 20px;">
+          <p hidden="true"><label>Non compilare: <input name="_honey" tabindex="-1" autocomplete="off"></label></p>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 20px;">
+            <label style="display: flex; flex-direction: column; gap: 8px; font-size: 14px; font-weight: 600; color: var(--c-ink);">Nome e cognome<input name="nome" required="true" style="font: inherit; font-weight: 400; font-size: 16px; padding: 14px 16px; border-radius: 12px; border: 1.5px solid color-mix(in srgb, var(--c-ink) 16%, transparent); background: var(--c-bg); color: var(--c-text);" style-focus="border-color: var(--c-acc); background: #fff; outline: none;"></label>
+            <label style="display: flex; flex-direction: column; gap: 8px; font-size: 14px; font-weight: 600; color: var(--c-ink);">Impresa o idea d’impresa<input name="azienda" style="font: inherit; font-weight: 400; font-size: 16px; padding: 14px 16px; border-radius: 12px; border: 1.5px solid color-mix(in srgb, var(--c-ink) 16%, transparent); background: var(--c-bg); color: var(--c-text);" style-focus="border-color: var(--c-acc); background: #fff; outline: none;"></label>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 20px;">
+            <label style="display: flex; flex-direction: column; gap: 8px; font-size: 14px; font-weight: 600; color: var(--c-ink);">Email<input name="email" type="email" required="true" style="font: inherit; font-weight: 400; font-size: 16px; padding: 14px 16px; border-radius: 12px; border: 1.5px solid color-mix(in srgb, var(--c-ink) 16%, transparent); background: var(--c-bg); color: var(--c-text);" style-focus="border-color: var(--c-acc); background: #fff; outline: none;"></label>
+            <label style="display: flex; flex-direction: column; gap: 8px; font-size: 14px; font-weight: 600; color: var(--c-ink);">Telefono<input name="telefono" type="tel" style="font: inherit; font-weight: 400; font-size: 16px; padding: 14px 16px; border-radius: 12px; border: 1.5px solid color-mix(in srgb, var(--c-ink) 16%, transparent); background: var(--c-bg); color: var(--c-text);" style-focus="border-color: var(--c-acc); background: #fff; outline: none;"></label>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <span style="font-size: 14px; font-weight: 600; color: var(--c-ink);">Ti interessa</span>
+            <div role="radiogroup" style="display: flex; flex-wrap: wrap; gap: 8px;">
+              <sc-for list="{{ topics }}" as="tp" hint-placeholder-count="4">
+                <button type="button" role="radio" aria-checked="{{ tp.on }}" onClick="{{ tp.pick }}" style="font: inherit; font-size: 15px; font-weight: 500; padding: 10px 16px; border-radius: 999px; cursor: pointer; border: 1.5px solid {{ tp.border }}; background: {{ tp.bg }}; color: {{ tp.fg }};">{{ tp.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+          <label style="display: flex; flex-direction: column; gap: 8px; font-size: 14px; font-weight: 600; color: var(--c-ink);">Il tuo progetto<textarea name="messaggio" rows="5" required="true" style="font: inherit; font-weight: 400; font-size: 16px; padding: 14px 16px; border-radius: 12px; border: 1.5px solid color-mix(in srgb, var(--c-ink) 16%, transparent); background: var(--c-bg); color: var(--c-text); resize: vertical;" style-focus="border-color: var(--c-acc); background: #fff; outline: none;"></textarea></label>
+          <sc-if value="{{ hasError }}" hint-placeholder-val="{{ false }}">
+            <p role="alert" style="margin: 0; font-size: 15px; line-height: 1.5; color: #a3261c;">Invio non riuscito. Riprova, oppure scrivi a <a href="mailto:fiorestefano@hotmail.com">fiorestefano@hotmail.com</a>.</p>
+          </sc-if>
+          <div style="display: flex; align-items: center; gap: 16px 20px; flex-wrap: wrap;">
+            <button type="submit" style="font: inherit; font-size: 16px; font-weight: 600; padding: 16px 28px; border-radius: 999px; border: 0; background: var(--c-ink); color: #fff; cursor: pointer;" style-hover="background: var(--c-accd);">{{ submitLabel }}</button>
+            <span style="font-size: 13px; line-height: 1.5; color: var(--c-mute2); max-width: 34ch;">Nessun impegno. Dati trattati secondo l’<a href="#/privacy">informativa privacy</a>.</span>
+          </div>
+        </form>
+      </sc-if>
+    </div>
+  </section>
+</sc-if>
+
+<sc-if value="{{ isPrivacy }}" hint-placeholder-val="{{ false }}">
+  <section data-screen-label="Privacy" style="position: relative; isolation: isolate; overflow: hidden; background: radial-gradient(100% 90% at 100% 0%, color-mix(in oklch, var(--c-acc) 10%, transparent) 0%, transparent 58%), linear-gradient(160deg, var(--c-surf) 0%, color-mix(in oklab, var(--c-surf), var(--c-tint) 58%) 100%);">
+    <img src="assets/logo-fiore.png" alt="" aria-hidden="true" style="position: absolute; left: -8%; bottom: -18%; transform: rotate(-10deg); width: clamp(220px, 30vw, 440px); height: auto; mix-blend-mode: multiply; opacity: 0.08; pointer-events: none; user-select: none; z-index: -1;">
+    <div style="max-width: 1280px; margin: 0 auto; padding: clamp(64px, 8vw, 110px) clamp(20px, 5vw, 64px) clamp(48px, 6vw, 72px);">
+      <p style="margin: 0 0 20px; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-surfacc);">Informativa ai sensi degli artt. 13–14 Reg. UE 2016/679</p>
+      <h1 style="font-family: var(--fh); font-weight: 700; font-size: clamp(42px, 6vw, 84px); line-height: 0.98; letter-spacing: -0.04em; margin: 0; color: var(--c-ink);">Privacy policy</h1>
+      <p style="margin: 20px 0 0; font-size: 15px; color: var(--c-mute);">Ultimo aggiornamento: settembre 2026</p>
+    </div>
+  </section>
+  <article style="max-width: 1280px; margin: 0 auto; padding: clamp(56px, 7vw, 96px) clamp(20px, 5vw, 64px) clamp(80px, 10vw, 120px);">
+    <div style="max-width: 72ch; display: flex; flex-direction: column; gap: 44px; font-size: 17px; line-height: 1.7; color: var(--c-text2);">
+      <section style="display: flex; flex-direction: column; gap: 12px;">
+        <h2 style="margin: 0; font-family: var(--fh); font-weight: 700; font-size: 26px; letter-spacing: -0.02em; color: var(--c-ink);">1. Titolare del trattamento</h2>
+        <p style="margin: 0;">Studio Dott. Stefano Fiore – Consulenze aziendali finanza agevolata, Via Pietro Mastino 1, 07100 Sassari (SS) · P.IVA 02519650903 · C.F. FRISFN72P28I452H · PEC <a href="mailto:fiorestefano@arubapec.it">fiorestefano@arubapec.it</a> · email <a href="mailto:fiorestefano@hotmail.com">fiorestefano@hotmail.com</a>.</p>
+      </section>
+      <section style="display: flex; flex-direction: column; gap: 12px;">
+        <h2 style="margin: 0; font-family: var(--fh); font-weight: 700; font-size: 26px; letter-spacing: -0.02em; color: var(--c-ink);">2. Dati trattati</h2>
+        <p style="margin: 0;"><strong style="color: var(--c-ink);">Dati forniti volontariamente:</strong> nome e cognome, email, telefono, nome dell’impresa e contenuto del messaggio inviati tramite il modulo di contatto o per email.</p>
+        <p style="margin: 0;"><strong style="color: var(--c-ink);">Dati di navigazione:</strong> indirizzo IP, tipo di browser, data e ora di accesso, raccolti automaticamente dai sistemi che ospitano il sito per finalità tecniche e di sicurezza.</p>
+      </section>
+      <section style="display: flex; flex-direction: column; gap: 12px;">
+        <h2 style="margin: 0; font-family: var(--fh); font-weight: 700; font-size: 26px; letter-spacing: -0.02em; color: var(--c-ink);">3. Finalità e base giuridica</h2>
+        <ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px;">
+          <li>Rispondere alle richieste di informazioni e di primo colloquio. Base giuridica: misure precontrattuali su richiesta dell’interessato (art. 6.1.b).</li>
+          <li>Erogare i servizi di consulenza eventualmente concordati (art. 6.1.b) e adempiere agli obblighi di legge, fiscali e contabili (art. 6.1.c).</li>
+          <li>Garantire il funzionamento e la sicurezza del sito. Base giuridica: legittimo interesse del Titolare (art. 6.1.f).</li>
+        </ul>
+        <p style="margin: 0;">I dati non sono usati per invii promozionali né per profilazione.</p>
+      </section>
+      <section style="display: flex; flex-direction: column; gap: 12px;">
+        <h2 style="margin: 0; font-family: var(--fh); font-weight: 700; font-size: 26px; letter-spacing: -0.02em; color: var(--c-ink);">4. Destinatari</h2>
+        <p style="margin: 0;">I dati possono essere trattati da fornitori che agiscono come responsabili del trattamento: il servizio di hosting (GitHub, Inc.), il servizio di inoltro del modulo di contatto (FormSubmit) e il fornitore di posta elettronica. Nell’ambito dei servizi concordati, i dati possono essere comunicati agli Enti erogatori e ai professionisti della rete coinvolti nel progetto, solo con il consenso del cliente. I dati non sono diffusi.</p>
+      </section>
+      <section style="display: flex; flex-direction: column; gap: 12px;">
+        <h2 style="margin: 0; font-family: var(--fh); font-weight: 700; font-size: 26px; letter-spacing: -0.02em; color: var(--c-ink);">5. Trasferimenti extra UE</h2>
+        <p style="margin: 0;">Alcuni fornitori (GitHub, FormSubmit, Google, YouTube) possono trattare dati negli Stati Uniti. Il trasferimento avviene sulla base del EU-US Data Privacy Framework o delle Clausole Contrattuali Standard approvate dalla Commissione Europea.</p>
+      </section>
+      <section style="display: flex; flex-direction: column; gap: 12px;">
+        <h2 style="margin: 0; font-family: var(--fh); font-weight: 700; font-size: 26px; letter-spacing: -0.02em; color: var(--c-ink);">6. Conservazione</h2>
+        <p style="margin: 0;">Le richieste di contatto sono conservate per il tempo necessario a gestirle e comunque non oltre 12 mesi, se non segue un incarico. I dati relativi agli incarichi sono conservati per 10 anni, come previsto dalla normativa civilistica e fiscale.</p>
+      </section>
+      <section style="display: flex; flex-direction: column; gap: 12px;">
+        <h2 style="margin: 0; font-family: var(--fh); font-weight: 700; font-size: 26px; letter-spacing: -0.02em; color: var(--c-ink);">7. Diritti dell’interessato</h2>
+        <p style="margin: 0;">In qualsiasi momento puoi chiedere accesso, rettifica, cancellazione, limitazione, portabilità dei dati e opporti al trattamento (artt. 15–22), scrivendo a <a href="mailto:fiorestefano@hotmail.com">fiorestefano@hotmail.com</a>. Hai inoltre diritto di proporre reclamo al Garante per la protezione dei dati personali (<a href="https://www.garanteprivacy.it" target="_blank" rel="noopener">garanteprivacy.it</a>).</p>
+      </section>
+      <section style="display: flex; flex-direction: column; gap: 12px;">
+        <h2 style="margin: 0; font-family: var(--fh); font-weight: 700; font-size: 26px; letter-spacing: -0.02em; color: var(--c-ink);">8. Cookie</h2>
+        <p style="margin: 0;">Per l’uso dei cookie consulta la <a href="#/cookie">Cookie policy</a>.</p>
+      </section>
+    </div>
+  </article>
+</sc-if>
+
+<sc-if value="{{ isCookie }}" hint-placeholder-val="{{ false }}">
+  <section data-screen-label="Cookie" style="position: relative; isolation: isolate; overflow: hidden; background: radial-gradient(100% 90% at 100% 0%, color-mix(in oklch, var(--c-acc) 10%, transparent) 0%, transparent 58%), linear-gradient(160deg, var(--c-surf) 0%, color-mix(in oklab, var(--c-surf), var(--c-tint) 58%) 100%);">
+    <img src="assets/logo-fiore.png" alt="" aria-hidden="true" style="position: absolute; right: 4%; top: -20%; transform: rotate(14deg); width: clamp(220px, 30vw, 440px); height: auto; mix-blend-mode: multiply; opacity: 0.08; pointer-events: none; user-select: none; z-index: -1;">
+    <div style="max-width: 1280px; margin: 0 auto; padding: clamp(64px, 8vw, 110px) clamp(20px, 5vw, 64px) clamp(48px, 6vw, 72px);">
+      <p style="margin: 0 0 20px; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-surfacc);">Linee guida Garante Privacy, 10 giugno 2021</p>
+      <h1 style="font-family: var(--fh); font-weight: 700; font-size: clamp(42px, 6vw, 84px); line-height: 0.98; letter-spacing: -0.04em; margin: 0; color: var(--c-ink);">Cookie policy</h1>
+      <p style="margin: 20px 0 0; font-size: 15px; color: var(--c-mute);">Ultimo aggiornamento: settembre 2026</p>
+    </div>
+  </section>
+  <article style="max-width: 1280px; margin: 0 auto; padding: clamp(56px, 7vw, 96px) clamp(20px, 5vw, 64px) clamp(80px, 10vw, 120px);">
+    <div style="max-width: 72ch; display: flex; flex-direction: column; gap: 44px; font-size: 17px; line-height: 1.7; color: var(--c-text2);">
+      <section style="display: flex; flex-direction: column; gap: 12px;">
+        <h2 style="margin: 0; font-family: var(--fh); font-weight: 700; font-size: 26px; letter-spacing: -0.02em; color: var(--c-ink);">Cosa sono i cookie</h2>
+        <p style="margin: 0;">Piccoli file di testo che i siti salvano sul dispositivo dell’utente per farlo funzionare o per raccogliere informazioni sulla navigazione.</p>
+      </section>
+      <section style="display: flex; flex-direction: column; gap: 12px;">
+        <h2 style="margin: 0; font-family: var(--fh); font-weight: 700; font-size: 26px; letter-spacing: -0.02em; color: var(--c-ink);">Cookie usati da questo sito</h2>
+        <p style="margin: 0;">Il sito <strong style="color: var(--c-ink);">non usa cookie di profilazione né strumenti di statistica</strong>. Sono presenti soltanto:</p>
+        <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 8px;">
+          <div style="padding: 22px 24px; border-radius: 16px; background: #fff; box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--c-ink) 10%, transparent); display: flex; flex-direction: column; gap: 6px;">
+            <span style="font-family: var(--fh); font-weight: 700; font-size: 19px; color: var(--c-ink);">Cookie tecnici</span>
+            <span style="font-size: 16px; line-height: 1.6;">Necessari al funzionamento del sito. Non richiedono consenso.</span>
+          </div>
+          <div style="padding: 22px 24px; border-radius: 16px; background: #fff; box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--c-ink) 10%, transparent); display: flex; flex-direction: column; gap: 6px;">
+            <span style="font-family: var(--fh); font-weight: 700; font-size: 19px; color: var(--c-ink);">Video YouTube (modalità privacy avanzata)</span>
+            <span style="font-size: 16px; line-height: 1.6;">Nella pagina Microcredito il video è incorporato da youtube-nocookie.com: YouTube non memorizza informazioni finché il video non viene avviato. Avviandolo si accettano le regole di <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google</a>.</span>
+          </div>
+          <div style="padding: 22px 24px; border-radius: 16px; background: #fff; box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--c-ink) 10%, transparent); display: flex; flex-direction: column; gap: 6px;">
+            <span style="font-family: var(--fh); font-weight: 700; font-size: 19px; color: var(--c-ink);">Google Fonts</span>
+            <span style="font-size: 16px; line-height: 1.6;">I caratteri tipografici sono caricati dai server Google, che ricevono l’indirizzo IP del visitatore. Non vengono salvati cookie.</span>
+          </div>
+        </div>
+      </section>
+      <section style="display: flex; flex-direction: column; gap: 12px;">
+        <h2 style="margin: 0; font-family: var(--fh); font-weight: 700; font-size: 26px; letter-spacing: -0.02em; color: var(--c-ink);">Come gestirli</h2>
+        <p style="margin: 0;">Puoi bloccare o cancellare i cookie dalle impostazioni del browser: <a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener">Chrome</a>, <a href="https://support.mozilla.org/it/kb/protezione-antitracciamento-avanzata-firefox-desktop" target="_blank" rel="noopener">Firefox</a>, <a href="https://support.apple.com/it-it/guide/safari/sfri11471/mac" target="_blank" rel="noopener">Safari</a>, <a href="https://support.microsoft.com/it-it/microsoft-edge" target="_blank" rel="noopener">Edge</a>. Bloccando i cookie tecnici alcune funzioni potrebbero non essere disponibili.</p>
+      </section>
+      <section style="display: flex; flex-direction: column; gap: 12px;">
+        <h2 style="margin: 0; font-family: var(--fh); font-weight: 700; font-size: 26px; letter-spacing: -0.02em; color: var(--c-ink);">Titolare e contatti</h2>
+        <p style="margin: 0;">Studio di Consulenza Dott. Stefano Fiore · <a href="mailto:fiorestefano@hotmail.com">fiorestefano@hotmail.com</a>. Per i dettagli sul trattamento dei dati consulta la <a href="#/privacy">Privacy policy</a>.</p>
+      </section>
+    </div>
+  </article>
+</sc-if>
+
+<sc-if value="{{ isLegal }}" hint-placeholder-val="{{ false }}">
+  <section data-screen-label="Note legali" style="position: relative; isolation: isolate; overflow: hidden; background: radial-gradient(100% 90% at 100% 0%, color-mix(in oklch, var(--c-acc) 10%, transparent) 0%, transparent 58%), linear-gradient(160deg, var(--c-surf) 0%, color-mix(in oklab, var(--c-surf), var(--c-tint) 58%) 100%);">
+    <img src="assets/logo-fiore.png" alt="" aria-hidden="true" style="position: absolute; right: -6%; top: 50%; transform: translateY(-50%) rotate(8deg); width: clamp(220px, 30vw, 440px); height: auto; mix-blend-mode: multiply; opacity: 0.08; pointer-events: none; user-select: none; z-index: -1;">
+    <div style="max-width: 1280px; margin: 0 auto; padding: clamp(64px, 8vw, 110px) clamp(20px, 5vw, 64px) clamp(48px, 6vw, 72px);">
+      <p style="margin: 0 0 20px; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-surfacc);">Ai sensi dell’art. 7 D.Lgs. 70/2003</p>
+      <h1 style="font-family: var(--fh); font-weight: 700; font-size: clamp(42px, 6vw, 84px); line-height: 0.98; letter-spacing: -0.04em; margin: 0; color: var(--c-ink);">Note legali</h1>
+      <p style="margin: 20px 0 0; font-size: 15px; color: var(--c-mute);">Ultimo aggiornamento: settembre 2026</p>
+    </div>
+  </section>
+  <article style="max-width: 1280px; margin: 0 auto; padding: clamp(56px, 7vw, 96px) clamp(20px, 5vw, 64px) clamp(72px, 9vw, 120px);">
+    <div style="max-width: 72ch; display: flex; flex-direction: column; gap: 44px; font-size: 17px; line-height: 1.7; color: var(--c-text2);">
+      <section style="display: flex; flex-direction: column; gap: 12px;">
+        <h2 style="margin: 0; font-family: var(--fh); font-weight: 700; font-size: 26px; letter-spacing: -0.02em; color: var(--c-ink);">Titolare del sito</h2>
+        <p style="margin: 0;">Studio Dott. Stefano Fiore – Consulenze aziendali finanza agevolata<br>Sede: Via Pietro Mastino 1, 07100 Sassari (SS)<br>P.IVA: 02519650903 · C.F.: FRISFN72P28I452H<br>Email: <a href="mailto:fiorestefano@hotmail.com">fiorestefano@hotmail.com</a> · PEC: <a href="mailto:fiorestefano@arubapec.it">fiorestefano@arubapec.it</a><br>Telefono: +39 346 954 6917</p>
+      </section>
+      <section style="display: flex; flex-direction: column; gap: 12px;">
+        <h2 style="margin: 0; font-family: var(--fh); font-weight: 700; font-size: 26px; letter-spacing: -0.02em; color: var(--c-ink);">Natura dell’attività</h2>
+        <p style="margin: 0;">Lo Studio svolge attività di consulenza e affiancamento nell’accesso a strumenti di finanza agevolata e di tutoraggio per il microcredito. <strong style="color: var(--c-ink);">Lo Studio non è un intermediario finanziario, non eroga finanziamenti e non raccoglie risparmio</strong>: le agevolazioni e i finanziamenti sono concessi esclusivamente dagli enti e dagli istituti competenti.</p>
+      </section>
+      <section style="display: flex; flex-direction: column; gap: 12px;">
+        <h2 style="margin: 0; font-family: var(--fh); font-weight: 700; font-size: 26px; letter-spacing: -0.02em; color: var(--c-ink);">Contenuti del sito</h2>
+        <p style="margin: 0;">Le informazioni pubblicate hanno carattere generale e divulgativo e non costituiscono consulenza professionale né offerta al pubblico. Bandi, requisiti, importi e scadenze possono variare: fanno fede i documenti ufficiali degli enti erogatori. La concessione di un’agevolazione dipende dalla valutazione dell’ente e non può essere garantita. I casi descritti in “Storie di successo” sono pubblicati con il consenso degli interessati e non rappresentano una promessa di risultato.</p>
+      </section>
+      <section style="display: flex; flex-direction: column; gap: 12px;">
+        <h2 style="margin: 0; font-family: var(--fh); font-weight: 700; font-size: 26px; letter-spacing: -0.02em; color: var(--c-ink);">Limitazione di responsabilità</h2>
+        <p style="margin: 0;">Lo Studio cura l’accuratezza e l’aggiornamento dei contenuti ma non risponde di eventuali errori, omissioni o danni derivanti dall’uso delle informazioni presenti sul sito, né di interruzioni o malfunzionamenti del servizio non dipendenti dalla propria volontà.</p>
+      </section>
+      <section style="display: flex; flex-direction: column; gap: 12px;">
+        <h2 style="margin: 0; font-family: var(--fh); font-weight: 700; font-size: 26px; letter-spacing: -0.02em; color: var(--c-ink);">Link esterni</h2>
+        <p style="margin: 0;">Il sito può contenere collegamenti a siti di terzi (enti pubblici, istituti, piattaforme video). Lo Studio non ne controlla i contenuti e non è responsabile delle relative politiche sulla privacy.</p>
+      </section>
+      <section style="display: flex; flex-direction: column; gap: 12px;">
+        <h2 style="margin: 0; font-family: var(--fh); font-weight: 700; font-size: 26px; letter-spacing: -0.02em; color: var(--c-ink);">Proprietà intellettuale</h2>
+        <p style="margin: 0;">Testi, logo, elementi grafici e immagini del sito sono di proprietà dello Studio o utilizzati su licenza. Ne è vietata la riproduzione, anche parziale, senza autorizzazione scritta. I marchi e i nomi di enti terzi citati appartengono ai rispettivi titolari.</p>
+      </section>
+      <section style="display: flex; flex-direction: column; gap: 12px;">
+        <h2 style="margin: 0; font-family: var(--fh); font-weight: 700; font-size: 26px; letter-spacing: -0.02em; color: var(--c-ink);">Privacy e cookie</h2>
+        <p style="margin: 0;">Il trattamento dei dati personali è descritto nella <a href="#/privacy">Privacy policy</a>; l’uso dei cookie nella <a href="#/cookie">Cookie policy</a>.</p>
+      </section>
+      <section style="display: flex; flex-direction: column; gap: 12px;">
+        <h2 style="margin: 0; font-family: var(--fh); font-weight: 700; font-size: 26px; letter-spacing: -0.02em; color: var(--c-ink);">Legge applicabile</h2>
+        <p style="margin: 0;">Le presenti note sono regolate dalla legge italiana. Per ogni controversia è competente il Foro di Sassari, salvo diversa previsione inderogabile a tutela del consumatore.</p>
+      </section>
+    </div>
+  </article>
+</sc-if>
+
+<sc-if value="{{ showCta }}" hint-placeholder-val="{{ true }}">
+  <section style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 64px) clamp(64px, 8vw, 110px);">
+    <div data-reveal="0" style="position: relative; overflow: hidden; border-radius: 28px; background: radial-gradient(110% 90% at 100% 0%, color-mix(in oklch, white 30%, transparent) 0%, transparent 58%), linear-gradient(135deg, color-mix(in oklch, var(--c-accb), var(--c-ink) 9%) 0%, var(--c-accb) 45%, color-mix(in oklab, var(--c-accb), var(--c-tint) 55%) 100%); color: var(--c-ink); padding: clamp(40px, 6vw, 80px); display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-end; justify-content: space-between;">
+      <div aria-hidden="true" data-float="1" style="position: absolute; right: -60px; top: -80px; width: 300px; height: 346px; clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); background: var(--c-tint); opacity: 0.55;"></div>
+      <h2 style="position: relative; margin: 0; font-family: var(--fh); font-weight: 700; font-size: clamp(36px, 5vw, 68px); line-height: 0.98; letter-spacing: -0.035em; max-width: 13ch;">Hai un’idea d’impresa? Parliamone.</h2>
+      <a href="#/contatti" style="position: relative; display: inline-flex; align-items: center; gap: 10px; padding: 18px 28px; border-radius: 999px; background: var(--c-ink); color: #fff; font-size: 17px; font-weight: 600; text-decoration: none;" style-hover="background: var(--c-accd); color: #fff;">Scrivimi <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+</sc-if>
+
+</main>
+
+<footer style="background: radial-gradient(110% 80% at 100% 0%, color-mix(in oklch, var(--c-acc) 12%, transparent) 0%, transparent 55%), linear-gradient(160deg, var(--c-ink) 0%, color-mix(in oklch, var(--c-ink), white 8%) 100%); color: var(--c-ondark);">
+  <div style="max-width: 1280px; margin: 0 auto; padding: 64px clamp(20px, 5vw, 64px) 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 40px;">
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+      <span style="font-family: var(--fh); font-weight: 700; font-size: 24px; letter-spacing: -0.02em; color: #fff;">Dott. Stefano Fiore</span>
+      <span style="font-size: 15px; line-height: 1.6;">Studio di Consulenza<br>Finanza agevolata e microcredito<br>Via Pietro Mastino 1, 07100 Sassari<br>Lun–ven 9:30–13:00 · 15:30–18:30</span>
+    </div>
+    <nav style="display: flex; flex-direction: column; gap: 10px; font-size: 15px;">
+      <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="6">
+        <a href="{{ n.href }}" style="color: var(--c-ondark); text-decoration: none;" style-hover="color: var(--c-accb);">{{ n.label }}</a>
+      </sc-for>
+    </nav>
+    <div style="display: flex; flex-direction: column; gap: 10px; font-size: 15px;">
+      <a href="mailto:fiorestefano@hotmail.com" style="color: #fff; text-decoration: none; font-weight: 600;" style-hover="color: var(--c-accb);">fiorestefano@hotmail.com</a>
+      <a href="tel:+393469546917" style="color: #fff; text-decoration: none; font-weight: 600;" style-hover="color: var(--c-accb);">Tel. +39 346 954 6917</a>
+      <a href="https://wa.me/393469546917" target="_blank" rel="noopener" style="color: #fff; text-decoration: none; font-weight: 600;" style-hover="color: var(--c-accb);">WhatsApp +39 346 954 6917</a>
+      <span style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px;"><a href="https://wa.me/393469546917" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp" style="width: 44px; height: 44px; border-radius: 999px; display: flex; align-items: center; justify-content: center; text-decoration: none; background: rgba(255,255,255,0.1); color: #fff;" style-hover="background: var(--c-accb); color: var(--c-ink);"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"></path></svg></a><a href="https://www.linkedin.com/in/stefano-fiore-a02bb4a3/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn" style="width: 44px; height: 44px; border-radius: 999px; display: flex; align-items: center; justify-content: center; text-decoration: none; background: rgba(255,255,255,0.1); color: #fff;" style-hover="background: var(--c-accb); color: var(--c-ink);"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.5h4V21H3V9.5Zm6.5 0h3.8v1.6h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.2c0-1.2 0-2.9-1.8-2.9s-2 1.4-2 2.8V21h-4V9.5Z"></path></svg></a><a href="https://www.facebook.com/stefano.fiore.735" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook" style="width: 44px; height: 44px; border-radius: 999px; display: flex; align-items: center; justify-content: center; text-decoration: none; background: rgba(255,255,255,0.1); color: #fff;" style-hover="background: var(--c-accb); color: var(--c-ink);"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.6c0-.9.3-1.5 1.5-1.5h1.5V4.4c-.3 0-1.2-.1-2.2-.1-2.2 0-3.8 1.4-3.8 3.9v2.3H8v3h2.5V21h3Z"></path></svg></a></span>
+    </div>
+  </div>
+  <div style="max-width: 1280px; margin: 0 auto; padding: 20px calc(clamp(16px, 3vw, 32px) + 72px) calc(clamp(16px, 3vw, 32px) + 72px) clamp(20px, 5vw, 64px); display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: space-between; font-size: 13px; color: var(--c-ondarkm); border-top: 1px solid rgba(255,255,255,0.1);">
+    <span style="display: flex; flex-direction: column; align-items: flex-start; gap: 10px;"><span>© 2026 Studio di Consulenza Dott. Stefano Fiore · P.IVA 02519650903</span><span style="display: flex; flex-wrap: wrap; gap: 8px 20px;"><a href="#/privacy" style="color: var(--c-ondarkm);" style-hover="color: var(--c-accb);">Privacy policy</a><a href="#/cookie" style="color: var(--c-ondarkm);" style-hover="color: var(--c-accb);">Cookie policy</a><a href="#/note-legali" style="color: var(--c-ondarkm);" style-hover="color: var(--c-accb);">Note legali</a></span></span>
+    <span style="display: flex; align-items: flex-end;"><a href="https://www.intellectasolutions.it" target="_blank" rel="noopener" title="Sito realizzato da Intellecta Solutions" style="display: inline-flex; align-items: center; gap: 6px; color: var(--c-ondarkm); text-decoration: none;" style-hover="color: var(--c-accb);"><span>Sito realizzato da</span><img src="assets/logo-intellecta.png" alt="" aria-hidden="true" style="width: 22px; height: 22px; flex: none; display: block; border-radius: 50%;"><span style="font-weight: 600; background: linear-gradient(135deg, #f6e27a 0%, #d4a941 45%, #b8862b 70%, #f1d27a 100%); -webkit-background-clip: text; background-clip: text; color: transparent;">Intellecta Solutions</span></a></span>
+  </div>
+</footer>
+
+<button type="button" onClick="{{ toTop }}" aria-label="Torna su" title="Torna su" style="position: fixed; right: clamp(16px, 3vw, 32px); bottom: clamp(16px, 3vw, 32px); z-index: 60; width: 56px; height: 56px; border-radius: 50%; border: 0; background: var(--c-ink); color: #fff; display: grid; place-items: center; cursor: pointer; box-shadow: 0 12px 30px -10px color-mix(in srgb, var(--c-ink) 55%, transparent); transition: opacity .3s ease, transform .3s ease, background .2s ease; opacity: {{ topOpacity }}; transform: translateY({{ topShift }}); pointer-events: {{ topEvents }};" style-hover="background: var(--c-accb); color: var(--c-ink);"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"></path><path d="M5 12l7-7 7 7"></path></svg></button>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;palette&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Blu notte e ottone&quot;,&quot;Grafite e blu acciaio&quot;,&quot;Petrolio e sabbia&quot;,&quot;Blu Fiore (originale)&quot;],&quot;default&quot;:&quot;Blu notte e ottone&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Colori&quot;},&quot;caratteri&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Hanken Grotesk&quot;,&quot;IBM Plex Sans&quot;,&quot;Instrument Sans&quot;,&quot;Newsreader + Instrument Sans&quot;],&quot;default&quot;:&quot;Hanken Grotesk&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Tipografia&quot;},&quot;animazioni&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Effetti&quot;},&quot;mostraNumeri&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Home&quot;}}">
+class Component extends DCLogic {
+  state = { page: 'home', menu: false, narrow: false, sent: false, sending: false, topic: 'Finanza agevolata', count: 0 };
+  pages = ['home', 'chi-siamo', 'finanza-agevolata', 'microcredito', 'come-lavoriamo', 'storie', 'contatti', 'privacy', 'cookie', 'note-legali'];
+  readHash = () => {
+    const p = location.hash.replace(/^#\/?/, '') || 'home';
+    const page = this.pages.includes(p) ? p : 'home';
+    if (page !== this.state.page) { this.setState({ page, menu: false }); window.scrollTo(0, 0); }
+    else if (this.state.menu) this.setState({ menu: false });
+  };
+  motionOn() { return (this.props.animazioni ?? true) && !window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
+  setupAmbient() {
+    if (!this.motionOn()) return;
+    const drift = [[18, -26, 5, 9000], [-22, 18, -4, 11000], [14, 22, 7, 7500]];
+    document.querySelectorAll('[data-float]').forEach(el => {
+      if (el.__fl) return; el.__fl = 1;
+      const [x, y, r, d] = drift[+el.dataset.float % 3];
+      el.animate([{ transform: 'translate(0,0) rotate(0deg)' }, { transform: `translate(${x}px,${y}px) rotate(${r}deg)` }],
+        { duration: d, iterations: Infinity, direction: 'alternate', easing: 'ease-in-out' });
+    });
+    document.querySelectorAll('[data-marquee]').forEach(el => {
+      if (el.__mq) return; el.__mq = 1;
+      el.animate([{ transform: 'translateX(0)' }, { transform: 'translateX(-50%)' }], { duration: 45000, iterations: Infinity });
+    });
+  }
+  onScroll = () => {
+    const y = window.scrollY, max = document.documentElement.scrollHeight - window.innerHeight;
+    const bar = document.querySelector('[data-progress]');
+    if (bar) bar.style.transform = `scaleX(${max > 0 ? Math.min(1, y / max) : 0})`;
+    if (this.motionOn()) document.querySelectorAll('[data-parallax]').forEach(el => { el.style.transform = `translateY(${y * +el.dataset.parallax}px)`; });
+    const t = y > 500; if (t !== this.state.showTop) this.setState({ showTop: t }); };
+  onResize = () => { const n = window.innerWidth < 1040; if (n !== this.state.narrow) this.setState({ narrow: n, menu: false }); };
+  componentDidMount() {
+    window.addEventListener('hashchange', this.readHash);
+    window.addEventListener('resize', this.onResize);
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    this.onResize(); this.readHash(); this.onScroll();
+    setTimeout(() => { this.setupReveal(); this.setupAmbient(); }, 60);
+    this.runCount();
+  }
+  componentWillUnmount() {
+    window.removeEventListener('hashchange', this.readHash);
+    window.removeEventListener('resize', this.onResize);
+    window.removeEventListener('scroll', this.onScroll);
+    if (this.io) this.io.disconnect();
+    cancelAnimationFrame(this.raf);
+  }
+  componentDidUpdate() {
+    if (this._lastPage !== this.state.page) {
+      const first = this._lastPage === undefined;
+      this._lastPage = this.state.page;
+      setTimeout(() => { this.setupReveal(); this.setupAmbient(); this.onScroll(); }, 40);
+      const main = document.querySelector('main');
+      if (!first && main && this.motionOn()) main.animate([{ opacity: 0, transform: 'translateY(14px)' }, { opacity: 1, transform: 'none' }], { duration: 520, easing: 'cubic-bezier(.2,.7,.2,1)' });
+      if (this.state.page === 'home') this.runCount();
+    }
+  }
+  setupReveal() {
+    if (!this.motionOn() || !('IntersectionObserver' in window)) return;
+    if (!this.io) this.io = new IntersectionObserver(entries => entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target; this.io.unobserve(el);
+      el.style.opacity = '';
+      const sibs = el.parentElement ? [...el.parentElement.children].filter(c => c.hasAttribute('data-reveal')) : [];
+      const delay = +(el.dataset.reveal || 0) + (sibs.length > 2 ? (sibs.indexOf(el) % 3) * 90 : 0);
+      const frames = el.tagName === 'H1' || el.tagName === 'H2'
+        ? [{ opacity: 0, transform: 'translateY(48px)', clipPath: 'inset(0 0 100% 0)' }, { opacity: 1, transform: 'none', clipPath: 'inset(0 0 -20% 0)' }]
+        : [{ opacity: 0, transform: 'translateY(32px) scale(.98)' }, { opacity: 1, transform: 'none' }];
+      el.animate(frames, { duration: 900, delay, easing: 'cubic-bezier(.2,.7,.2,1)', fill: 'backwards' });
+    }), { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('[data-reveal]').forEach(el => {
+      if (el.__rv) return; el.__rv = 1;
+      el.style.opacity = '0';
+      this.io.observe(el);
+    });
+  }
+  runCount() {
+    if (!(this.props.animazioni ?? true)) { this.setState({ count: 1 }); return; }
+    cancelAnimationFrame(this.raf);
+    const t0 = performance.now();
+    const tick = now => {
+      const t = Math.min(1, (now - t0) / 1600);
+      this.setState({ count: 1 - Math.pow(1 - t, 3) });
+      if (t < 1) this.raf = requestAnimationFrame(tick);
+    };
+    this.raf = requestAnimationFrame(tick);
+  }
+  applyFont() {
+    const H = "'Hanken Grotesk', sans-serif", P = "'IBM Plex Sans', sans-serif", I = "'Instrument Sans', sans-serif", N = "'Newsreader', Georgia, serif";
+    const fonts = {
+      'Hanken Grotesk': [H, H], 'IBM Plex Sans': [P, P], 'Instrument Sans': [I, I], 'Newsreader + Instrument Sans': [N, I]
+    };
+    const f = fonts[this.props.caratteri] || fonts['Hanken Grotesk'];
+    const root = document.documentElement.style;
+    root.setProperty('--fh', f[0]); root.setProperty('--fb', f[1] + ', system-ui');
+    const keys = ['ink','accd','acc','accb','tint','surf','surfacc','spot','deco1','deco2','ondark','ondarkm','text','text2','mute','mute2','bg'];
+    const pal = {
+      'Blu notte e ottone': ['#0e1f3a','#7d5f27','#a8823d','#d9b56a','#f1e6cf','#ece8df','#7a5c24','#8a6a2e','#c9b891','#2c4a7a','#d8dde8','#a3adc2','#1a2233','#36405a','#56607a','#5e677d','#f8f6f1'],
+      'Grafite e blu acciaio': ['#1c2430','#2d5d8f','#3b78b5','#8fb8e0','#dde8f3','#e9edf2','#3b5f86','#2d5d8f','#9fb3c8','#3b78b5','#dbe1e8','#a2adba','#1c2430','#3a4452','#5a6472','#5f6977','#f6f7f9'],
+      'Petrolio e sabbia': ['#0f3a3c','#1f6b68','#2e8a85','#9fd3c7','#dcefea','#ece7dc','#6b5a3a','#a0673a','#bcd9d2','#2e8a85','#d6e6e3','#9fbcb8','#16292a','#34494a','#566a6a','#5d6f6f','#f7f5f0'],
+      'Blu Fiore (originale)': ['#15126b','#0a64ad','#1d9be0','#4cc6f5','#bdeaf9','#e6e5fa','#5b58c9','#b03fa0','#b3b1ea','#0a74c4','#d4d6f5','#a9acdc','#1d1b4d','#2e2c5c','#4a4a70','#5a5a80','#f7f8fc']
+    };
+    const p = pal[this.props.palette] || pal['Blu notte e ottone'];
+    keys.forEach((k, i) => root.setProperty('--c-' + k, p[i]));
+  }
+  renderVals() {
+    this.applyFont();
+    const { page, narrow, menu, count } = this.state;
+    const navItems = [
+      ['home', 'Home'], ['chi-siamo', 'Chi siamo'], ['finanza-agevolata', 'Finanza agevolata'],
+      ['microcredito', 'Microcredito'], ['come-lavoriamo', 'Come lavoriamo'], ['storie', 'Storie di successo']
+    ].map(([id, label]) => ({
+      label, href: '#/' + id, cur: page === id ? 'page' : undefined,
+      color: page === id ? 'var(--c-ink)' : 'var(--c-mute)', bar: page === id ? 'var(--c-accb)' : 'transparent'
+    }));
+    const topics = ['Finanza agevolata', 'Microcredito', 'Certificazioni', 'Formazione'].map(label => {
+      const on = this.state.topic === label;
+      return { label, on: String(on), pick: () => this.setState({ topic: label }),
+        bg: on ? 'var(--c-ink)' : 'transparent', fg: on ? '#fff' : 'var(--c-ink)', border: on ? 'var(--c-ink)' : 'color-mix(in srgb, var(--c-ink) 20%, transparent)' };
+    });
+    const pad = (i) => String(i + 1).padStart(2, '0');
+    const services = [
+      'Analisi dell’idea imprenditoriale per le startup: cantierabilità, investimenti, strumenti più adatti',
+      'Analisi delle imprese già attive e dei loro progetti di sviluppo e investimento',
+      'Ricerca e studio degli strumenti agevolativi e dei finanziamenti più appropriati',
+      'Analisi di fattibilità personalizzata dell’idea o del progetto',
+      'Business plan, analisi economico-finanziaria, piano di sviluppo e documentazione del bando',
+      'Assistenza nei SAL, rapporti con gli Enti Pubblici, rendicontazione descrittiva e finanziaria',
+      'Assistenza nelle verifiche e nei controlli degli Enti preposti',
+      'Aggiornamento costante su novità e scadenze di finanziamenti e agevolazioni',
+      'Ricerca di partnership per progetti imprenditoriali specifici'
+    ].map((t, i) => ({ n: pad(i), t }));
+    const steps = [
+      { t: 'Ascolto', d: 'Ogni intervento nasce dall’ascolto delle esigenze dell’impresa e dell’idea progettuale.' },
+      { t: 'Visione condivisa', d: 'Una strategia chiara, con step definiti, per trasformare le opportunità in leve di sviluppo.' },
+      { t: 'Fattibilità e business plan', d: 'Analisi economico-finanziaria e documentazione tecnica coerente con le linee guida del bando.' },
+      { t: 'Domanda e iter', d: 'Presentazione della domanda e gestione dell’intero iter, fino al termine dell’investimento e ai controlli.' },
+      { t: 'Una rete di professionisti', d: 'Competenze complementari per rispondere a ogni aspetto tecnico, amministrativo e strategico.' }
+    ].map((s, i) => ({ ...s, n: pad(i) }));
+    const diffs = [
+      { t: 'Un solo referente, dalla A alla Z', d: 'Dall’idea alla domanda, dai SAL alla rendicontazione, fino ai controlli degli Enti: segue tutto lo stesso professionista.' },
+      { t: 'Tutto spiegato, prima di decidere', d: 'Limiti e opportunità di ogni strumento, messi sul tavolo con chiarezza. Le scelte d’impresa sono spesso scelte di vita.' },
+      { t: 'Anche quando il bando non c’è', d: 'Da tutor dell’Ente Nazionale per il Microcredito, una strada concreta per chi non rientra nelle agevolazioni ordinarie.' },
+      { t: 'Oltre vent’anni accanto alle PMI', d: 'Certificazioni, processi, filiere: prima di finanziare un progetto, ne conosco il funzionamento.' },
+      { t: 'Una rete di professionisti', d: 'Commercialisti e consulenti con competenze complementari, per le richieste più articolate.' }
+    ].map((s, i) => ({ ...s, n: pad(i) }));
+    const stories = [
+      { tipo: 'PIA · Industria, artigianato e servizi 2013', nome: 'Commercio all’ingrosso di carni fresche e surgelate', desc: 'Contributi agevolativi per quasi € 700.000 su un progetto di oltre € 1.900.000.' },
+      { tipo: 'Finanziamento agevolato e fondo perduto', nome: 'Ristorazione e somministrazione', desc: 'Finanziamento agevolato di € 75.000 e contributo a fondo perduto di oltre € 75.000. Pratica agevolativa, business plan, domanda e rendicontazione delle spese.' },
+      { tipo: 'Legge 3 Commercio Sardegna 2022', nome: 'Bar senza cucina', desc: 'Sovvenzione in conto capitale di quasi € 130.000. Pratica agevolativa, domanda e rendicontazione delle spese.' },
+      { tipo: 'Microcredito imprenditoriale', nome: 'Bar e caffetteria', desc: 'Finanziamento bancario di € 75.000 per l’acquisto dell’azienda. Analisi della business idea, business plan e tutoraggio.' }
+    ].map((c, i) => ({ ...c, id: 'v2-storia-' + (i + 1) }));
+    const enti = ['Unione Europea', 'Stato', 'Regioni', 'Province Autonome', 'GAL', 'Comuni', 'Città Metropolitane', 'Camere di Commercio', 'Istituti di credito', 'Fondazioni'];
+    return {
+      wide: !narrow, narrow, menuOpen: narrow && menu, menuAria: String(menu), menuLabel: menu ? 'Chiudi' : 'Menu',
+      toggleMenu: () => this.setState(s => ({ menu: !s.menu })),
+      navItems, topics, services, steps, diffs, stories, enti, entiLoop: [...enti, ...enti],
+      isHome: page === 'home', isChi: page === 'chi-siamo', isFin: page === 'finanza-agevolata',
+      isMicro: page === 'microcredito', isMetodo: page === 'come-lavoriamo', isStorie: page === 'storie',
+      isContatti: page === 'contatti', isPrivacy: page === 'privacy', isCookie: page === 'cookie', isLegal: page === 'note-legali',
+      showCta: !['contatti', 'privacy', 'cookie', 'note-legali'].includes(page),
+      showNumbers: this.props.mostraNumeri ?? true,
+      n20: Math.round(20 * count), n1: Math.max(1, Math.round(count)), n10: Math.round(10 * count),
+      sent: this.state.sent, notSent: !this.state.sent, submitLabel: this.state.sending ? 'Invio…' : 'Invia la richiesta →',
+      submit: e => {
+        e.preventDefault();
+        const fd = new FormData(e.target);
+        if (fd.get('_honey')) return;
+        const data = Object.fromEntries(fd.entries());
+        data.interesse = this.state.topic;
+        data._subject = 'Nuova richiesta dal sito – ' + (data.nome || '');
+        data._replyto = data.email; data._template = 'table';
+        this.setState({ sending: true, error: false });
+        fetch('https://formsubmit.co/ajax/fiorestefano@hotmail.com', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(data) })
+          .then(r => r.json()).then(j => { if (String(j.success) !== 'true') throw 0; this.setState({ sent: true, sending: false }); e.target.reset(); })
+          .catch(() => this.setState({ sending: false, error: true }));
+      },
+      reset: () => this.setState({ sent: false }),
+      hasError: !!this.state.error,
+      toTop: () => window.scrollTo({ top: 0, behavior: 'smooth' }),
+      topOpacity: this.state.showTop ? 1 : 0, topShift: this.state.showTop ? '0' : '16px', topEvents: this.state.showTop ? 'auto' : 'none'
+    };
+  }
+}
+</script>
+</body>
+</html>
