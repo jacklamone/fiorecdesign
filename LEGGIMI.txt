@@ -5,5 +5,7 @@ PUBBLICARE SU GITHUB PAGES
 4. Dopo 1-2 minuti il sito è su https://TUONOME.github.io/studio-fiore/
 5. Dominio personalizzato: Settings > Pages > Custom domain, poi spunta "Enforce HTTPS".
 
-ATTENZIONE: il form contatti è predisposto per Netlify e su GitHub Pages non invia messaggi.
-Serve collegarlo a un servizio come Web3Forms (gratuito).
+MODULO CONTATTI: collegato a fiorestefano@hotmail.com tramite FormSubmit.
+Al PRIMO invio dal sito online arriva a quella casella un'email "Activate Form":
+il Dott. Fiore deve cliccare il link di conferma (controllare anche lo spam).
+Da quel momento ogni richiesta arriva direttamente nella sua email.
