@@ -61,7 +61,6 @@ Radius card 22px. Animazioni: solo fade-in/scorrimento leggero all'ingresso (`da
 - Footer: a sinistra copyright + Privacy/Cookie/Note legali; a destra "Sito realizzato da" + logo Intellecta Solutions in oro.
 
 ## Ancora aperto
-- Foto del Dott. Fiore per "Chi siamo".
 - Dominio personalizzato (non ancora scelto). Quando c'è: file `CNAME` nella root + DNS.
 - Revisione legale di Privacy, Cookie, Note legali.
 - Attivazione FormSubmit (click sul link di conferma).
@@ -69,4 +68,4 @@ Radius card 22px. Animazioni: solo fade-in/scorrimento leggero all'ingresso (`da
 ## File
 - `sito-pronto/` — da pubblicare così com'è nella root del repo.
 - `sorgente/Studio Fiore v2.dc.html` — sorgente di design (richiede `support.js` e `image-slot.js` nella stessa cartella per l'anteprima).
-- `sorgente/assets/` — logo-fiore.png, logo-fiore-t.png, logo-intellecta.png, hero-vetro.jpg.
+- `sorgente/assets/` — logo-fiore.png, logo-fiore-t.png, logo-intellecta.png, hero-vetro.jpg, foto-stefano.jpg (foto di "Chi siamo", 1000×1250, 4:5).
